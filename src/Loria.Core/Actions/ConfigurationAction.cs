@@ -30,9 +30,7 @@ namespace Loria.Core.Actions
                 {
                     if (string.Equals(modifier, "get", StringComparison.CurrentCultureIgnoreCase))
                     {
-                        Console.WriteLine();
-                        Console.WriteLine($"{property.GetValue(Configuration)}");
-                        Console.WriteLine();
+                        Configuration.TalkBack($"{property.GetValue(Configuration)}");
                     }
                     else if (string.Equals(modifier, "set", StringComparison.CurrentCultureIgnoreCase))
                     {
@@ -47,10 +45,6 @@ namespace Loria.Core.Actions
                         {
                             property.SetValue(Configuration, Convert.ChangeType(value, property.PropertyType));
                         }
-
-                        Console.WriteLine();
-                        Console.WriteLine("Done");
-                        Console.WriteLine();
                     }
                 }
                 else

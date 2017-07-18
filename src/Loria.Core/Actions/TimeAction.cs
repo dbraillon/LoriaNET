@@ -23,9 +23,7 @@ namespace Loria.Core.Actions
             var time = DateTime.Now;
             var timeStr = time.ToLongTimeString();
 
-            Console.WriteLine();
-            Console.WriteLine($"It's {timeStr}");
-            Console.WriteLine();
+            Configuration.TalkBack(timeStr);
         }
     }
 }

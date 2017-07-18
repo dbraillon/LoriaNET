@@ -1,13 +1,9 @@
 ﻿using Microsoft.CognitiveServices;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Loria.Core.Actions
 {
-    public class SoundAction : IAction
+    public class SoundAction : IAction, ITalkBack
     {
         public string Command => "say";
         public string Description => "Make Loria says whatever you want";
@@ -24,6 +20,12 @@ namespace Loria.Core.Actions
         {
             var message = string.Join(" ", args);
 
+            var textToSpeech = new TextToSpeech();
+            await textToSpeech.RequestAsync(message, Configuration.Culture);
+        }
+
+        public async Task TalkBackAsync(string message)
+        {
             var textToSpeech = new TextToSpeech();
             await textToSpeech.RequestAsync(message, Configuration.Culture);
         }

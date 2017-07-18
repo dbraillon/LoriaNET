@@ -1,4 +1,5 @@
 ﻿using Loria.Core;
+using Loria.Core.Actions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,12 @@ namespace Loria.App
         static void Main(string[] args)
         {
             var input = string.Empty;
-            var loria = new Core.Loria(new Configuration());
+
+            var loriaConf = new Configuration();
+            loriaConf.RegisterTalkBack((mess) => Console.WriteLine($"loria> {mess}"));
+            loriaConf.RegisterTalkBack<SoundAction>();
+
+            var loria = new Core.Loria(loriaConf);
 
             while ((input = ReadLine()) != "quit")
             {

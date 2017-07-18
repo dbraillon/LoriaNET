@@ -47,6 +47,7 @@
     <Compile Include="Actions\HelpAction.cs" />
     <Compile Include="Actions\SoundAction.cs" />
     <Compile Include="Configuration.cs" />
+    <Compile Include="ITalkBack.cs" />
     <Compile Include="Loria.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
