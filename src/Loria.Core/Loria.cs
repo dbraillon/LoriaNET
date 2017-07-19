@@ -11,13 +11,13 @@ namespace Loria.Core
     {
         public Configuration Configuration { get; set; }
 
-        public IEnumerable<IAction> Actions { get; set; }
+        public List<IAction> Actions { get; set; }
 
         public Loria(Configuration configuration)
         {
             Configuration = configuration;
 
-            Actions = ActionFactory.GetAllActions(Configuration);
+            Actions = ActionFactory.GetAllActions(Configuration).ToList();
         }
 
         public async Task HandleCommandAsync(string command, string[] args)

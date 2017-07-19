@@ -1,7 +1,7 @@
 ﻿using Microsoft.CognitiveServices;
 using System.Threading.Tasks;
 
-namespace Loria.Core.Actions
+namespace Loria.Core.Actions.Sound
 {
     public class SoundAction : IAction, ITalkBack
     {

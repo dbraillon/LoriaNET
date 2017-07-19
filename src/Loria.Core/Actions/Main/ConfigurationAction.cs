@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Loria.Core.Actions
+namespace Loria.Core.Actions.Main
 {
     public class ConfigurationAction : IAction
     {

@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Loria.Core.Actions
+namespace Loria.Core.Actions.Main
 {
     public class HelpAction : IAction
     {
@@ -22,7 +22,7 @@ namespace Loria.Core.Actions
             await Task.Delay(0);
 
             var command = args.FirstOrDefault();
-            var actions = ActionFactory.GetAllActions(Configuration);
+            var actions = ActionFactory.GetAllActions(Configuration).OrderBy(a => a.Command);
             var relatedAction = actions.FirstOrDefault(a => a.Command == command);
 
             if (relatedAction != null)

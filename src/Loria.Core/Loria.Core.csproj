@@ -41,11 +41,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Actions\ActionFactory.cs" />
-    <Compile Include="Actions\ConfigurationAction.cs" />
-    <Compile Include="Actions\TimeAction.cs" />
+    <Compile Include="Actions\Main\ConfigurationAction.cs" />
+    <Compile Include="Actions\Time\AlarmAction.cs" />
+    <Compile Include="Actions\Time\DateAction.cs" />
+    <Compile Include="Actions\Time\TimeAction.cs" />
     <Compile Include="Actions\IAction.cs" />
-    <Compile Include="Actions\HelpAction.cs" />
-    <Compile Include="Actions\SoundAction.cs" />
+    <Compile Include="Actions\Main\HelpAction.cs" />
+    <Compile Include="Actions\Sound\SoundAction.cs" />
     <Compile Include="Configuration.cs" />
     <Compile Include="ITalkBack.cs" />
     <Compile Include="Loria.cs" />

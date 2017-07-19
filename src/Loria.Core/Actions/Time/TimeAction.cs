@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace Loria.Core.Actions
+namespace Loria.Core.Actions.Time
 {
     public class TimeAction : IAction
     {
