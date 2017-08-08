@@ -31,6 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -41,16 +42,25 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Actions\ActionFactory.cs" />
-    <Compile Include="Actions\Main\ConfigurationAction.cs" />
-    <Compile Include="Actions\Time\AlarmAction.cs" />
-    <Compile Include="Actions\Time\DateAction.cs" />
-    <Compile Include="Actions\Time\TimeAction.cs" />
-    <Compile Include="Actions\IAction.cs" />
-    <Compile Include="Actions\Main\HelpAction.cs" />
-    <Compile Include="Actions\Sound\SoundAction.cs" />
-    <Compile Include="Configuration.cs" />
-    <Compile Include="ITalkBack.cs" />
-    <Compile Include="Loria.cs" />
+    <Compile Include="Modules\ConfigurationModule.cs" />
+    <Compile Include="Modules\AlarmModule.cs" />
+    <Compile Include="Modules\DateModule.cs" />
+    <Compile Include="Modules\TimeModule.cs" />
+    <Compile Include="Core\Actions\IAction.cs" />
+    <Compile Include="Modules\HttpAction.cs" />
+    <Compile Include="Core\Modules\Modules.cs" />
+    <Compile Include="Core\Callbacks\Callbacks.cs" />
+    <Compile Include="Core\Callbacks\ICallback.cs" />
+    <Compile Include="Core\Configuration.cs" />
+    <Compile Include="Core\Actions\Actions.cs" />
+    <Compile Include="Core\Modules\IModule.cs" />
+    <Compile Include="Core\Listeners\Listener.cs" />
+    <Compile Include="Core\Listeners\IListener.cs" />
+    <Compile Include="Core\Listeners\Listeners.cs" />
+    <Compile Include="Core\Loria.cs" />
+    <Compile Include="Modules\ConsoleModule.cs" />
+    <Compile Include="Modules\HelpModule.cs" />
+    <Compile Include="Modules\VoiceModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -58,6 +68,10 @@
       <Project>{26f6df79-fa0c-419f-8ae9-b7e82f5dd0d8}</Project>
       <Name>Microsoft.CognitiveServices</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Actions\Main\" />
+    <Folder Include="Actions\Web\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -9,6 +9,13 @@ namespace Microsoft.CognitiveServices
 {
     public class TextToSpeech
     {
+        public string ApiKey { get; set; }
+
+        public TextToSpeech(string apiKey)
+        {
+            ApiKey = apiKey;
+        }
+
         public async Task RequestAsync(string message, CultureInfo culture)
         {
             var appId = Guid.NewGuid().ToString("N");
@@ -47,12 +54,12 @@ namespace Microsoft.CognitiveServices
             player.Play();
         }
 
-        static async Task<string> GetAccessTokenAsync()
+        public async Task<string> GetAccessTokenAsync()
         {
             var client = new HttpClient();
 
             var message = new HttpRequestMessage();
-            message.Headers.Add("Ocp-Apim-Subscription-Key", "610b8e0ad3544d99b74e015441648e6e");
+            message.Headers.Add("Ocp-Apim-Subscription-Key", ApiKey);
             message.Method = new HttpMethod("POST");
             message.RequestUri = new Uri("https://api.cognitive.microsoft.com/sts/v1.0/issueToken");
 
@@ -60,16 +67,14 @@ namespace Microsoft.CognitiveServices
             return await response.Content.ReadAsStringAsync();
         }
         
-        static string EncodeAccessToken(string token)
+        public string EncodeAccessToken(string token)
         {
             return token; // Convert.ToBase64String(Encoding.ASCII.GetBytes(token));
         }
 
-        static AuthenticationHeaderValue GetAuthorizationHeader(string token)
+        public AuthenticationHeaderValue GetAuthorizationHeader(string token)
         {
             return new AuthenticationHeaderValue("Bearer", EncodeAccessToken(token));
         }
-
-
     }
 }

@@ -1,12 +1,14 @@
 ﻿using System.Threading.Tasks;
 
-namespace Loria.Core.Actions
+namespace Loria.Core
 {
     public interface IAction
     {
+        string Name { get; }
         string Command { get; }
         string Description { get; }
         string Usage { get; }
-        Task PerformAsync(string[] args);
+
+        void Perform(string[] args);
     }
 }
