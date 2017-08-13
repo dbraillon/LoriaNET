@@ -37,7 +37,7 @@ namespace Loria.Core
 
         public void Perform(string[] args)
         {
-            var command = args.Skip(1).FirstOrDefault();
+            var command = args.FirstOrDefault();
             var relatedAction = Configuration.Actions.GetByCommand(command);
 
             if (relatedAction == null)
