@@ -1,41 +1,41 @@
-﻿using System;
+﻿//using System;
 
-namespace Loria.Core
-{
-    public class TimeModule : IModule, IAction
-    {
-        public string Name => "Time module";
-        public string Command => "time";
-        public string Description => "Give you the current time";
-        public string Usage => "time";
+//namespace LoriaNET
+//{
+//    public class TimeModule : IModule, IAction
+//    {
+//        public string Name => "Time module";
+//        public string Command => "time";
+//        public string Description => "Give you the current time";
+//        public string Usage => "time";
 
-        public Configuration Configuration { get; set; }
+//        public Configuration Configuration { get; set; }
         
-        public TimeModule(Configuration configuration)
-        {
-            Configuration = configuration;
-        }
+//        public TimeModule(Configuration configuration)
+//        {
+//            Configuration = configuration;
+//        }
 
-        public bool IsEnabled() => true;
+//        public bool IsEnabled() => true;
 
-        public void Configure()
-        {
-        }
+//        public void Configure()
+//        {
+//        }
 
-        public void Activate()
-        {
-        }
+//        public void Activate()
+//        {
+//        }
 
-        public void Deactivate()
-        {
-        }
+//        public void Deactivate()
+//        {
+//        }
 
-        public void Perform(string[] args)
-        {
-            var time = DateTime.Now;
-            var timeStr = time.ToString("t", Configuration.Culture);
+//        public void Perform(string[] args)
+//        {
+//            var time = DateTime.Now;
+//            var timeStr = time.ToString("t", Configuration.Culture);
 
-            Configuration.Callbacks.CallbackAll(timeStr);
-        }
-    }
-}
+//            Configuration.Callbacks.CallbackAll(timeStr);
+//        }
+//    }
+//}

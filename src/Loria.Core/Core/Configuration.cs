@@ -1,75 +1,106 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Globalization;
-using System.Linq;
+using System.Resources;
+using System.Threading;
 
-namespace Loria.Core
+namespace LoriaNET
 {
-    public class Configuration
+    /// <summary>
+    /// Loria's configuration object.
+    /// </summary>
+    public sealed class Configuration
     {
-        public CultureInfo DefaultCulture => CultureInfo.GetCultureInfo("en-US");
+        /// <summary>
+        /// Current Loria's culture.
+        /// </summary>
         public CultureInfo Culture
         {
-            get => CultureInfo.GetCultureInfo(ConfigurationManager.AppSettings.Get("core::Culture"));
-            set => ConfigurationManager.AppSettings.Set("core::Culture", value.Name);
+            get => CultureInfo.GetCultureInfo(Get("core::Culture"));
+            set
+            {
+                // Persist culture to configuration file
+                Set("core::Culture", value.Name);
+
+                // Change current culture for resource manager to handle resource file
+                CultureInfo.CurrentCulture = value;
+                CultureInfo.CurrentUICulture = value;
+                CultureInfo.DefaultThreadCurrentCulture = value;
+                CultureInfo.DefaultThreadCurrentUICulture = value;
+
+                // Propagate the culture change
+                CultureChanged?.Invoke(value);
+            }
         }
 
-        public Dictionary<string, string> Configs { get; set; }
+        /// <summary>
+        /// An event fired when Loria's culture has changed.
+        /// </summary>
+        internal event Action<CultureInfo> CultureChanged;
+        
+        /// <summary>
+        /// Every modules loaded by Loria.
+        /// </summary>
+        internal Modules Modules { get; set; }
 
-        public Modules Modules { get; set; }
-        public Actions Actions { get; }
-        public Callbacks Callbacks { get; }
-        public Listeners Listeners { get; }
+        /// <summary>
+        /// Every actions loaded by Loria.
+        /// </summary>
+        internal Actions Actions { get; }
 
-        public Configuration()
+        /// <summary>
+        /// Every callbacks loaded by Loria.
+        /// </summary>
+        internal Callbacks Callbacks { get; }
+
+        /// <summary>
+        /// Every listeners loaded by Loria.
+        /// </summary>
+        internal Listeners Listeners { get; }
+
+        /// <summary>
+        /// Loria's hub, used to propagate commands or callbacks.
+        /// </summary>
+        internal Hub Hub { get; }
+
+        /// <summary>
+        /// Create a basic configuration.
+        /// </summary>
+        public Configuration() : this(CultureInfo.CurrentUICulture) { }
+
+        /// <summary>
+        /// Create an advanced configuration.
+        /// </summary>
+        public Configuration(CultureInfo culture)
         {
-            Culture = CultureInfo.CurrentCulture;
-            Configs = ConfigurationManager.AppSettings.AllKeys.ToDictionary(k => k, k => ConfigurationManager.AppSettings[k]);
+            // Set culture
+            Culture = culture;
 
             // Configure all modules
             Modules = new Modules(this);
             Modules.ConfigureAll();
 
             // Initialize actions, callbacks and listeners
-            Actions = new Actions(Modules.All.Where(c => typeof(IAction).IsAssignableFrom(c.GetType()) && c.IsEnabled()).OfType<IAction>().ToList());
-            Callbacks = new Callbacks(Modules.All.Where(c => typeof(ICallback).IsAssignableFrom(c.GetType()) && c.IsEnabled()).OfType<ICallback>().ToList());
-            Listeners = new Listeners(Modules.All.Where(c => typeof(IListener).IsAssignableFrom(c.GetType()) && c.IsEnabled()).OfType<IListener>().ToList());
+            Actions = new Actions(Modules.GetAll<IAction>());
+            Callbacks = new Callbacks(Modules.GetAll<ICallback>());
+            Listeners = new Listeners(Modules.GetAll<IListener>());
+
+            // Prepare the hub
+            Hub = new Hub(this);
         }
+        
+        /// <summary>
+        /// Write a key/value pair in the configuration file.
+        /// </summary>
+        /// <param name="key">A key.</param>
+        /// <param name="value">A value.</param>
+        internal void Set(string key, object value) => ConfigurationManager.AppSettings.Set(key, value.ToString());
 
-        public void Hub(string command)
-        {
-            if (string.IsNullOrEmpty(command)) return;
-
-            var commandSplitted = command.Split(' ');
-            var direction = commandSplitted.ElementAtOrDefault(0);
-
-            if (string.Equals(direction, "callback", StringComparison.InvariantCultureIgnoreCase))
-            {
-                var optionnalName = commandSplitted.ElementAtOrDefault(1);
-                var callback = Callbacks.Get(optionnalName);
-
-                if (callback == null)
-                {
-                    Callbacks.CallbackAll(string.Join(" ", commandSplitted.Skip(1).ToArray()));
-                }
-                else
-                {
-                    callback.Callback(string.Join(" ", commandSplitted));
-                }
-            }
-            else
-            {
-                var action = Actions.GetByCommand(direction);
-                if (action != null)
-                {
-                    action.Perform(commandSplitted.Skip(1).ToArray());
-                }
-                else
-                {
-                    Callbacks.CallbackAll($"Command '{direction}' does not exist.");
-                }
-            }
-        }
+        /// <summary>
+        /// Read a value from a given key in the configuration file.
+        /// </summary>
+        /// <param name="key">A key.</param>
+        /// <returns>A value.</returns>
+        internal string Get(string key) => ConfigurationManager.AppSettings.Get(key);
     }
 }

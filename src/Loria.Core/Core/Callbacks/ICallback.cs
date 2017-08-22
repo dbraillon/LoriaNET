@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Loria.Core
+﻿namespace LoriaNET
 {
-    public interface ICallback
+    /// <summary>
+    /// An interface to make callbacks for Loria.
+    /// </summary>
+    internal interface ICallback
     {
         string Name { get; }
 

@@ -1,28 +1,77 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 
-namespace Loria.Core
+namespace LoriaNET
 {
-    public class Listeners
+    /// <summary>
+    /// A class that contains a set of listeners, allowing user to retrieve a specific 
+    /// listener or to start/stop every listeners in set.
+    /// </summary>
+    internal sealed class Listeners
     {
-        public List<IListener> All { get; }
+        /// <summary>
+        /// A set of actions.
+        /// </summary>
+        private IListener[] Set { get; }
 
-        public Listeners(List<IListener> listeners)
+        /// <summary>
+        /// Create an instance with a pre defined set of listeners.
+        /// </summary>
+        /// <param name="listeners">A set of listeners.</param>
+        internal Listeners(params IListener[] listeners)
         {
-            All = listeners;
+            Set = listeners;
         }
 
-        public IListener Get(string name) => All.FirstOrDefault(l => string.Equals(l.Name, name, StringComparison.InvariantCultureIgnoreCase));
+        /// <summary>
+        /// Retrieve a listener by its name.
+        /// </summary>
+        /// <param name="name">A name of a listener.</param>
+        /// <returns>Found listener or null.</returns>
+        public IListener Get(string name) => Set.FirstOrDefault(l => string.Equals(l.Name, name, StringComparison.InvariantCultureIgnoreCase));
+        
+        /// <summary>
+        /// Start every listener in set.
+        /// </summary>
+        public void StartAll()
+        {
+            foreach (var listener in Set)
+            {
+                listener.Start();
+            }
+        }
 
-        public void Start(string name) => Get(name)?.Start();
-        public void Stop(string name) => Get(name)?.Stop();
-        public void Pause(string name) => Get(name)?.Pause();
-        public void Resume(string name) => Get(name)?.Resume();
+        /// <summary>
+        /// Stop every listener in set.
+        /// </summary>
+        public void StopAll()
+        {
+            foreach (var listener in Set)
+            {
+                listener.Stop();
+            }
+        }
 
-        public void StartAll() => All.ForEach(l => l.Start());
-        public void StopAll() => All.ForEach(l => l.Stop());
-        public void PauseAll() => All.ForEach(l => l.Pause());
-        public void ResumeAll() => All.ForEach(l => l.Resume());
+        /// <summary>
+        /// Pause every listener in set.
+        /// </summary>
+        public void PauseAll()
+        {
+            foreach (var listener in Set)
+            {
+                listener.Pause();
+            }
+        }
+
+        /// <summary>
+        /// Resume every listener in set.
+        /// </summary>
+        public void ResumeAll()
+        {
+            foreach (var listener in Set)
+            {
+                listener.Resume();
+            }
+        }
     }
 }

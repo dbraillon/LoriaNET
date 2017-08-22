@@ -7,8 +7,8 @@
     <ProjectGuid>{1EF35DB9-E062-4C14-98EF-80AA4B510BDA}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Loria.Core</RootNamespace>
-    <AssemblyName>Loria.Core</AssemblyName>
+    <RootNamespace>LoriaNET</RootNamespace>
+    <AssemblyName>LoriaNET</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -20,6 +20,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -39,6 +40,7 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Speech" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -47,9 +49,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\Command.cs" />
+    <Compile Include="Core\Entity.cs" />
+    <Compile Include="Core\Hub.cs" />
     <Compile Include="Modules\ConfigurationModule.cs" />
-    <Compile Include="Modules\AlarmModule.cs" />
+    <Compile Include="Modules\Revamped\ReminderModule.cs" />
     <Compile Include="Modules\DateModule.cs" />
+    <Compile Include="Modules\SpeechRecognitionModule.cs" />
     <Compile Include="Modules\SpotifyModule.cs" />
     <Compile Include="Modules\TimeModule.cs" />
     <Compile Include="Core\Actions\IAction.cs" />
@@ -64,10 +70,20 @@
     <Compile Include="Core\Listeners\IListener.cs" />
     <Compile Include="Core\Listeners\Listeners.cs" />
     <Compile Include="Core\Loria.cs" />
-    <Compile Include="Modules\ConsoleModule.cs" />
+    <Compile Include="Modules\Revamped\ConsoleModule.cs" />
     <Compile Include="Modules\HelpModule.cs" />
-    <Compile Include="Modules\VoiceModule.cs" />
+    <Compile Include="Modules\Revamped\VoiceModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\Strings.fr.Designer.cs">
+      <DependentUpon>Strings.fr.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Strings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Strings.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Microsoft.CognitiveServices\Microsoft.CognitiveServices\Microsoft.CognitiveServices.csproj">
@@ -78,6 +94,16 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Strings.fr.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Strings.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Strings.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Strings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

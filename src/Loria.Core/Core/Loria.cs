@@ -1,15 +1,33 @@
-﻿using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using System.Threading;
 
-namespace Loria.Core
+namespace LoriaNET
 {
-    public class Loria
+    /// <summary>
+    /// Base class to interact with Loria.
+    /// </summary>
+    public sealed class Loria
     {
-        public bool IsLiving { get; protected set; }
+        /// <summary>
+        /// Flag to know if Loria is living.
+        /// </summary>
+        public bool IsLiving { get; private set; }
 
-        public Configuration Configuration { get; set; }
-        
+        /// <summary>
+        /// Loria's configuration.
+        /// </summary>
+        public Configuration Configuration { get; }
+
+        /// <summary>
+        /// Create a new instance of Loria with a basic configuration.
+        /// </summary>
+        public Loria() : this(new Configuration())
+        {
+        }
+
+        /// <summary>
+        /// Create a new instance of Loria.
+        /// </summary>
+        /// <param name="configuration">A custom configuration.</param>
         public Loria(Configuration configuration)
         {
             Configuration = configuration;
@@ -20,12 +38,23 @@ namespace Loria.Core
         /// </summary>
         public void Live()
         {
+            // Fallback to LiveAsync
             LiveAsync();
 
-            while (IsLiving)
-            {
-                Thread.Sleep(1000);
-            }
+            // Block current thread
+            while (IsLiving) Thread.Sleep(1000);
+        }
+
+        /// <summary>
+        /// Start Loria and return as soon as everything has been set up.
+        /// </summary>
+        public void LiveAsync()
+        {
+            // Turn the flag on
+            IsLiving = true;
+
+            // Start enabled listeners
+            Configuration.Listeners.StartAll();
         }
 
         /// <summary>
@@ -38,17 +67,6 @@ namespace Loria.Core
 
             // Everything have been stopped
             IsLiving = false;
-        }
-
-        /// <summary>
-        /// Start Loria and return as soon as everything has been set up.
-        /// </summary>
-        public void LiveAsync()
-        {
-            IsLiving = true;
-
-            // Start enabled listeners
-            Configuration.Listeners.StartAll();
         }
     }
 }

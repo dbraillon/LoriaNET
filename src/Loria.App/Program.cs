@@ -1,12 +1,12 @@
-﻿using Loria.Core;
+﻿using System.Globalization;
 
-namespace Loria.App
+namespace LoriaNET
 {
     class Program
     {
         static void Main(string[] args)
         {
-            var loria = new Core.Loria(new Configuration());
+            var loria = new Loria(new Configuration(CultureInfo.GetCultureInfo("fr-fr")));
             loria.Live();
         }
     }

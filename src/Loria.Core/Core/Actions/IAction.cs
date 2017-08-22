@@ -1,14 +1,18 @@
-﻿using System.Threading.Tasks;
-
-namespace Loria.Core
+﻿namespace LoriaNET
 {
-    public interface IAction
+    /// <summary>
+    /// An interface to make actions for Loria.
+    /// </summary>
+    internal interface IAction
     {
         string Name { get; }
-        string Command { get; }
         string Description { get; }
-        string Usage { get; }
 
-        void Perform(string[] args);
+        string Command { get; }
+        string[] SupportedIntents { get; }
+        string[] SupportedEntities { get; }
+        string[] Samples { get; }
+
+        void Perform(Command command);
     }
 }

@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Loria.Core
+﻿namespace LoriaNET
 {
-    public interface IModule
+    /// <summary>
+    /// An interface to make modules for Loria.
+    /// </summary>
+    internal interface IModule
     {
         string Name { get; }
 

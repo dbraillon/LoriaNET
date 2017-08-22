@@ -1,22 +1,50 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
-namespace Loria.Core
+namespace LoriaNET
 {
-    public class Callbacks
+    /// <summary>
+    /// A class that contains a set of callbacks, allowing user to retrieve a specific 
+    /// callback or to propagate a message to every callbacks in set.
+    /// </summary>
+    internal sealed class Callbacks
     {
-        public List<ICallback> All { get; }
+        /// <summary>
+        /// Keyword used to make the difference when calling a callback or an action.
+        /// </summary>
+        internal const string Keyword = "callback";
 
-        public Callbacks(List<ICallback> callbacks)
+        /// <summary>
+        /// A set of callbacks.
+        /// </summary>
+        private ICallback[] Set { get; }
+
+        /// <summary>
+        /// Create an instance with a pre defined set of callbacks.
+        /// </summary>
+        /// <param name="callbacks">A set of callbacks.</param>
+        internal Callbacks(params ICallback[] callbacks)
         {
-            All = callbacks;
+            Set = callbacks;
         }
 
-        public ICallback Get(string name) => All.FirstOrDefault(l => string.Equals(l.Name, name, StringComparison.InvariantCultureIgnoreCase));
+        /// <summary>
+        /// Retrieve a callback by its name.
+        /// </summary>
+        /// <param name="name">A name of a callback.</param>
+        /// <returns>Found callback or null.</returns>
+        internal ICallback Get(string name) => Set.FirstOrDefault(l => string.Equals(l.Name, name, StringComparison.InvariantCultureIgnoreCase));
 
-        public void Callback(string name, string message) => Get(name)?.Callback(message);
-        public void CallbackAll(string message) => All.ForEach(c => c.Callback(message));
+        /// <summary>
+        /// Propagate a message to every callback in the set.
+        /// </summary>
+        /// <param name="message">A message to propagate.</param>
+        internal void Propagate(string message)
+        {
+            foreach (var callback in Set)
+            {
+                callback.Callback(message);
+            }
+        }
     }
 }
