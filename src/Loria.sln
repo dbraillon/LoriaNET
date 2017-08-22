@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26430.12
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Loria.Core", "Loria.Core\Loria.Core.csproj", "{1EF35DB9-E062-4C14-98EF-80AA4B510BDA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoriaNET", "Loria.Core\LoriaNET.csproj", "{1EF35DB9-E062-4C14-98EF-80AA4B510BDA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Microsoft.CognitiveServices", "Microsoft.CognitiveServices", "{70A01D63-10BC-4B5D-B0FD-96667731E904}"
 EndProject
