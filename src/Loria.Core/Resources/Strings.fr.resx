@@ -120,6 +120,9 @@
   <data name="CommandNotFound" xml:space="preserve">
     <value>La commande n'existe pas ou le module correspondant n'est pas activé.</value>
   </data>
+  <data name="DateTimeIntentNotUnderstood" xml:space="preserve">
+    <value>Vous ne pouvez pas faire ça avec le module de date et d'heure.</value>
+  </data>
   <data name="GeneralAt" xml:space="preserve">
     <value>À</value>
   </data>

@@ -70,6 +70,15 @@ namespace LoriaNET.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You can&apos;t do that with date time..
+        /// </summary>
+        internal static string DateTimeIntentNotUnderstood {
+            get {
+                return ResourceManager.GetString("DateTimeIntentNotUnderstood", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to At.
         /// </summary>
         internal static string GeneralAt {

@@ -16,9 +16,6 @@ namespace LoriaNET
 
         const string TextEntity = "text";
         const string DateTimeEntity = "datetime";
-        const string DateTime2Entity = "datetime2";
-        const string DateEntity = "date";
-        const string TimeEntity = "time";
         const string LocationEntity = "location";
 
         public override string Name => "Reminder";
@@ -31,7 +28,7 @@ namespace LoriaNET
         };
         public string[] SupportedEntities => new string[]
         {
-            TextEntity, DateEntity, LocationEntity
+            TextEntity, DateTimeEntity, LocationEntity
         };
         public string[] Samples => new string[]
         {
@@ -97,10 +94,8 @@ namespace LoriaNET
 
                     // Get needed entities (location is not yet supported)
                     var textEntity = command.GetEntity(TextEntity);
-                    //var dateTimeEntity = command.GetEntity(DateTimeEntity);
-                    //var dateTime2Entity = command.GetEntity(DateTime2Entity);
-                    var dateEntity = command.GetEntity(TimeEntity);
-                    //var timeEntity = command.GetEntity(TimeEntity);
+                    var dateEntity = command.GetEntity(DateTimeEntity);
+                    var locationEntity = command.GetEntity(LocationEntity);
 
                     // Give error messages if something is wrong with the command
                     if (textEntity == null || string.IsNullOrEmpty(textEntity.Value))
@@ -117,7 +112,7 @@ namespace LoriaNET
                     }
 
                     // Parse given date
-                    if (DateTime.TryParseExact(dateEntity.Value, new string[] { "yyyyMMddHHmm", "yyyy-MM-ddTHH:mm" }, Configuration.Culture, DateTimeStyles.None, out DateTime date))
+                    if (DateTime.TryParseExact(dateEntity.Value, new string[] { "yyyyMMddHHmm", "yyyy-MM-ddTHH:mm", "yyyy-MM-ddTHH" }, Configuration.Culture, DateTimeStyles.None, out DateTime date))
                     {
                         // Create the reminder
                         Reminders.Add(new Reminder(textEntity.Value, date));

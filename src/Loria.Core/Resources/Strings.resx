@@ -120,6 +120,9 @@
   <data name="CommandNotFound" xml:space="preserve">
     <value>Command does not exist or corresponding module is disabled.</value>
   </data>
+  <data name="DateTimeIntentNotUnderstood" xml:space="preserve">
+    <value>You can't do that with date time.</value>
+  </data>
   <data name="GeneralAt" xml:space="preserve">
     <value>At</value>
   </data>

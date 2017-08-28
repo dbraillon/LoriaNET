@@ -29,6 +29,11 @@ namespace LoriaNET
         public Entity[] Entities { get; set; }
 
         /// <summary>
+        /// Raw command string.
+        /// </summary>
+        public string Raw { get; set; }
+
+        /// <summary>
         /// Create an instance of a command by parsing a string.
         /// </summary>
         /// <param name="commandStr">A string to parse.</param>
@@ -65,6 +70,7 @@ namespace LoriaNET
             }
 
             Entities = entities.ToArray();
+            Raw = commandStr;
         }
 
         /// <summary>
