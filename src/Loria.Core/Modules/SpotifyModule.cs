@@ -14,7 +14,7 @@
 //        public string Name => "Spotify module";
 //        public string Command => "spotify";
 //        public string Description => "Controls the spotify player";
-//        public string Usage => 
+//        public string Usage =>
 //            "spotify primary [secondary] [value]" + Environment.NewLine +
 //            $"{string.Join(Environment.NewLine, SimplifiedSpotifyWebAPI.SupportedCommands.Select(c => $" {c.Key}\t{string.Join("|", c.Value)}"))}";
 
@@ -94,7 +94,7 @@
 //                default: return "error";
 //            }
 //        }
-         
+
 //        public string Get(IEnumerable<string> args)
 //        {
 //            var secondary = args.FirstOrDefault();
@@ -108,7 +108,7 @@
 //        }
 //        public PlaybackContext GetDevice() => HandleError(SpotifyWebAPI.GetPlayback());
 //        public AvailabeDevices GetDevices() => HandleError(SpotifyWebAPI.GetDevices());
-         
+
 //        public bool Set(IEnumerable<string> args)
 //        {
 //            var secondary = args.FirstOrDefault();
@@ -136,7 +136,7 @@
 //            }
 //        }
 //        public bool SetVolume(IEnumerable<string> args) => HandleError(SpotifyWebAPI.SetVolume(int.Parse(args.FirstOrDefault()))).StatusCode() == HttpStatusCode.NoContent;
-         
+
 //        public string Search(IEnumerable<string> args)
 //        {
 //            var secondary = args.FirstOrDefault();
@@ -238,7 +238,7 @@
 //        }
 //        public bool PlayPrevious(IEnumerable<string> args) => HandleError(SpotifyWebAPI.SkipPlaybackToPrevious()).StatusCode() == HttpStatusCode.NoContent;
 //        public bool PlayNext(IEnumerable<string> args) => HandleError(SpotifyWebAPI.SkipPlaybackToNext()).StatusCode() == HttpStatusCode.NoContent;
-        
+
 //        public bool Pause(IEnumerable<string> args)
 //        {
 //            var secondary = args.FirstOrDefault();

@@ -70,7 +70,7 @@ namespace Microsoft.CognitiveServices
 
         private void RecognitionClient_OnConversationError(object sender, SpeechErrorEventArgs e)
         {
-            Console.WriteLine(e);
+            Console.WriteLine($"{e.SpeechErrorCode}: {e.SpeechErrorText}");
         }
     }
 

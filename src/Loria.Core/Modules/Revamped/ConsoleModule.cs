@@ -5,9 +5,9 @@ namespace LoriaNET
     /// <summary>
     /// The console module provides a listener and a callback to interact with a console.
     /// </summary>
-    internal sealed class ConsoleModule : Listener, IModule, ICallback
+    internal sealed class ConsoleModule : Listener, ICallback, IModule
     {
-        public override string Name => "Console";
+        public override string Name => "Console module";
 
         /// <summary>
         /// Create the console module.

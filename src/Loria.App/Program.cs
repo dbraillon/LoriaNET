@@ -6,7 +6,11 @@ namespace LoriaNET
     {
         static void Main(string[] args)
         {
-            var loria = new Loria(new Configuration(CultureInfo.GetCultureInfo("fr-fr")));
+            var loria = new Loria(
+                configuration: new Configuration(
+                    culture: CultureInfo.GetCultureInfo("fr-fr")
+                )
+            );
             loria.Live();
         }
     }

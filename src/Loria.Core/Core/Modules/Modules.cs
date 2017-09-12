@@ -23,7 +23,7 @@ namespace LoriaNET
         {
             Set = Assembly.GetExecutingAssembly().GetTypes()
                 .Where(t =>
-                    t.GetInterfaces().Contains(typeof(IModule)) &&
+                    typeof(IModule).IsAssignableFrom(t) &&
                     t.IsClass && !t.IsAbstract
                 )
                 .Select(t => Activator.CreateInstance(t, configuration) as IModule)

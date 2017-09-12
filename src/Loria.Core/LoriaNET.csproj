@@ -34,8 +34,11 @@
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="Roggle.Core, Version=2.2.23.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Roggle.2.2.23\lib\net45\Roggle.Core.dll</HintPath>
+    </Reference>
     <Reference Include="SpotifyAPI, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SpotifyAPI-NET.2.15.1\lib\SpotifyAPI.dll</HintPath>
+      <HintPath>..\packages\SpotifyAPI-NET.2.16.0\lib\SpotifyAPI.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -52,9 +55,12 @@
     <Compile Include="Core\Command.cs" />
     <Compile Include="Core\Entity.cs" />
     <Compile Include="Core\Hub.cs" />
-    <Compile Include="Modules\Revamped\ConfigurationModule.cs" />
-    <Compile Include="Modules\Revamped\ReminderModule.cs" />
-    <Compile Include="Modules\Revamped\DateTimeModule.cs" />
+    <Compile Include="Core\Modules\Module.cs" />
+    <Compile Include="Modules\ConfigurationModule.cs" />
+    <Compile Include="Modules\ReminderModule.cs" />
+    <Compile Include="Modules\DateTimeModule.cs" />
+    <Compile Include="Modules\Revamped\LogModule.cs" />
+    <Compile Include="Modules\Revamped\SpotifyModule.cs" />
     <Compile Include="Modules\SpotifyModule.cs" />
     <Compile Include="Core\Actions\IAction.cs" />
     <Compile Include="Modules\Revamped\HttpModule.cs" />
@@ -69,8 +75,8 @@
     <Compile Include="Core\Listeners\Listeners.cs" />
     <Compile Include="Core\Loria.cs" />
     <Compile Include="Modules\Revamped\ConsoleModule.cs" />
-    <Compile Include="Modules\Revamped\HelpModule.cs" />
-    <Compile Include="Modules\Revamped\VoiceModule.cs" />
+    <Compile Include="Modules\HelpModule.cs" />
+    <Compile Include="Modules\VoiceModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Strings.fr.Designer.cs">
       <DependentUpon>Strings.fr.resx</DependentUpon>
@@ -84,6 +90,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Libraries\Loria.Spotify\Loria.Spotify.csproj">
+      <Project>{b5fa7cd5-bcf2-42e2-aa77-b719e7c3849f}</Project>
+      <Name>Loria.Spotify</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Microsoft.CognitiveServices\Microsoft.CognitiveServices\Microsoft.CognitiveServices.csproj">
       <Project>{26f6df79-fa0c-419f-8ae9-b7e82f5dd0d8}</Project>
       <Name>Microsoft.CognitiveServices</Name>

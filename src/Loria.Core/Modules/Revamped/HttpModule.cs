@@ -1,4 +1,8 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading;
@@ -6,76 +10,37 @@ using System.Threading;
 namespace LoriaNET.Web
 {
     /// <summary>
-    /// The http module provides intents and entities for forwarding commands to Loria.
+    /// The http module provides a listener to forward commands to Loria.
     /// </summary>
-    internal sealed class HttpModule : IModule, IListener
+    internal sealed class HttpModule : Module, IListener
     {
-        public string Name => "Http module";
-
-        /// <summary>
-        /// Loria's configuration.
-        /// </summary>
-        public Configuration Configuration { get; set; }
-
+        public override string Name => "Http module";
+        
         /// <summary>
         /// The web server.
         /// </summary>
         public WebServer WebServer { get; set; }
+
+        /// <summary>
+        /// Flag to know if listener is paused.
+        /// </summary>
+        public bool Paused { get; set; }
         
-        /// <summary>
-        /// Create the http module.
-        /// </summary>
-        /// <param name="configuration">Loria's configuration.</param>
         public HttpModule(Configuration configuration)
-        {
-            Configuration = configuration;
-            WebServer = new WebServer(HandleRequest, "http://localhost:8080/");
-        }
-
-        /// <summary>
-        /// Configure the http module.
-        /// </summary>
-        public void Configure() => Activate();
-
-        /// <summary>
-        /// Check if http module is enabled.
-        /// </summary>
-        /// <returns>State of http module.</returns>
-        public bool IsEnabled() => WebServer.IsListening;
-
-        /// <summary>
-        /// Activate the http module.
-        /// </summary>
-        public void Activate() => WebServer.Run();
-
-        /// <summary>
-        /// Deactivate the http module.
-        /// </summary>
-        public void Deactivate() => WebServer.Stop();
-
-        /// <summary>
-        /// Start http listener.
-        /// </summary>
-        public void Start() => Activate();
-
-        /// <summary>
-        /// Stop http listener.
-        /// </summary>
-        public void Stop() => Deactivate();
-
-        /// <summary>
-        /// Pause http listener.
-        /// </summary>
-        public void Pause()
+            : base(configuration)
         {
         }
-
-        /// <summary>
-        /// Resume http listener.
-        /// </summary>
-        public void Resume()
+        
+        public override void Configure()
         {
+            WebServer = new WebServer(HandleRequest, "http://*:80/");
+            Activate();
         }
+        
+        public void Start() => WebServer.Run();
+        public void Stop() => WebServer.Stop();
+        public void Pause() => Paused = true;
+        public void Resume() => Paused = false;
 
         /// <summary>
         /// Callback to handle a http request.
@@ -84,14 +49,29 @@ namespace LoriaNET.Web
         /// <returns>The http response.</returns>
         public string HandleRequest(HttpListenerRequest request)
         {
-            // Get URL and remove first slash (/)
-            var url = request.RawUrl.Substring(1);
+            if (!Paused)
+            {
+                var contentType = request.ContentType;
 
-            // Split URL with slash (/) and join with space ( ) to get the command or message
-            var commandOrCallback = string.Join(" ", url.Split('/'));
+                switch (contentType)
+                {
+                    case "application/json": return HandleJsonRequest(request);
+                    default: return "501";
+                }
+            }
 
-            // Propagate the command or message
-            Configuration.Hub.Propagate(commandOrCallback);
+            return "503";
+        }
+
+        private string HandleJsonRequest(HttpListenerRequest request)
+        {
+            if (request.HttpMethod != "POST") return "405";
+
+            var streamReader = new StreamReader(request.InputStream);
+            var body = streamReader.ReadToEnd();
+            var json = JsonConvert.DeserializeObject<Dictionary<string, object>>(body);
+
+            Configuration.Hub.PropagateCallback($"Incoming http request: {string.Join(", ", json.Select(node => $"{node.Key}: {node.Value}"))}");
 
             return "OK";
         }
@@ -106,34 +86,30 @@ namespace LoriaNET.Web
 
         public WebServer(string[] prefixes, Func<HttpListenerRequest, string> method)
         {
-            if (!HttpListener.IsSupported)
-                throw new NotSupportedException(
-                    "Needs Windows XP SP2, Server 2003 or later.");
+            if (!HttpListener.IsSupported) throw new NotSupportedException("Needs Windows XP SP2, Server 2003 or later.");
 
             // URI prefixes are required, for example 
             // "http://localhost:8080/index/".
-            if (prefixes == null || prefixes.Length == 0)
-                throw new ArgumentException("prefixes");
-
-            // A responder method is required
-            if (method == null)
-                throw new ArgumentException("method");
+            if (prefixes == null || prefixes.Length == 0) throw new ArgumentException(nameof(prefixes));
 
             foreach (string s in prefixes)
+            {
                 _listener.Prefixes.Add(s);
+            }
 
-            _responderMethod = method;
+            _responderMethod = method ?? throw new ArgumentException(nameof(method));
             _listener.Start();
         }
 
         public WebServer(Func<HttpListenerRequest, string> method, params string[] prefixes)
-            : this(prefixes, method) { }
+            : this(prefixes, method)
+        {
+        }
 
         public void Run()
         {
             ThreadPool.QueueUserWorkItem((o) =>
             {
-                //Console.WriteLine("Webserver running...");
                 try
                 {
                     while (_listener.IsListening)
