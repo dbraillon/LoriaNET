@@ -62,11 +62,16 @@ namespace Loria.Spotify
         public void SetPlayback()
         {
             var computerName = Environment.MachineName;
-            var devices = GetDevices();
-            var device = devices.Devices.FirstOrDefault(d => string.Equals(d.Name, computerName, StringComparison.InvariantCultureIgnoreCase));
-            if (device != null)
+            var playback = GetPlayback();
+
+            if (!string.Equals(playback.Device?.Name, computerName, StringComparison.InvariantCultureIgnoreCase))
             {
-                SetPlayback(device.Id);
+                var devices = GetDevices();
+                var device = devices.Devices.FirstOrDefault(d => string.Equals(d.Name, computerName, StringComparison.InvariantCultureIgnoreCase));
+                if (device != null)
+                {
+                    SetPlayback(device.Id);
+                }
             }
         }
         public void SetVolume(int volumePercent)
