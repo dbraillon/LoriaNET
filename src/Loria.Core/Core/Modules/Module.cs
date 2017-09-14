@@ -3,7 +3,7 @@
     /// <summary>
     /// A class providing a simple way to implement the module interface.
     /// </summary>
-    internal abstract class Module : IModule
+    public abstract class Module : IModule
     {
         public Configuration Configuration { get; set; }
         public bool Enabled { get; set; }

@@ -4,78 +4,143 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Text;
 using System.Threading;
 
-namespace LoriaNET.Web
+namespace LoriaNET
 {
-    /// <summary>
-    /// The http module provides a listener to forward commands to Loria.
-    /// </summary>
-    internal sealed class HttpModule : Module, IListener
-    {
-        public override string Name => "Http module";
-        
-        /// <summary>
-        /// The web server.
-        /// </summary>
-        public WebServer WebServer { get; set; }
+    //    /// <summary>
+    //    /// The http module provides a listener to forward commands to Loria.
+    //    /// </summary>
+    //    internal sealed class HttpModule : Module, IListener, IAction
+    //    {
+    //        public const string GetIntent = "get";
+    //        public const string PostIntent = "post";
 
-        /// <summary>
-        /// Flag to know if listener is paused.
-        /// </summary>
-        public bool Paused { get; set; }
-        
-        public HttpModule(Configuration configuration)
-            : base(configuration)
-        {
-        }
-        
-        public override void Configure()
-        {
-            WebServer = new WebServer(HandleRequest, "http://*:80/");
-            Activate();
-        }
-        
-        public void Start() => WebServer.Run();
-        public void Stop() => WebServer.Stop();
-        public void Pause() => Paused = true;
-        public void Resume() => Paused = false;
+    //        public const string UrlEntity = "url";
 
-        /// <summary>
-        /// Callback to handle a http request.
-        /// </summary>
-        /// <param name="request">The http request.</param>
-        /// <returns>The http response.</returns>
-        public string HandleRequest(HttpListenerRequest request)
-        {
-            if (!Paused)
-            {
-                var contentType = request.ContentType;
+    //        public override string Name => "Http module";
 
-                switch (contentType)
-                {
-                    case "application/json": return HandleJsonRequest(request);
-                    default: return "501";
-                }
-            }
+    //        public string Description => "Accept and send http request with Loria!";
 
-            return "503";
-        }
+    //        public string Command => "http";
 
-        private string HandleJsonRequest(HttpListenerRequest request)
-        {
-            if (request.HttpMethod != "POST") return "405";
+    //        public string[] SupportedIntents => new string[]
+    //        {
+    //            GetIntent, PostIntent
+    //        };
 
-            var streamReader = new StreamReader(request.InputStream);
-            var body = streamReader.ReadToEnd();
-            var json = JsonConvert.DeserializeObject<Dictionary<string, object>>(body);
+    //        public string[] SupportedEntities => new string[]
+    //        {
+    //            UrlEntity
+    //        };
 
-            Configuration.Hub.PropagateCallback($"Incoming http request: {string.Join(", ", json.Select(node => $"{node.Key}: {node.Value}"))}");
+    //        public string[] Samples => new string[]
+    //        {
+    //            "http get http://loria.io"
+    //        };
 
-            return "OK";
-        }
-    }
+    //        /// <summary>
+    //        /// The web server.
+    //        /// </summary>
+    //        public WebServer WebServer { get; set; }
+
+    //        /// <summary>
+    //        /// Flag to know if listener is paused.
+    //        /// </summary>
+    //        public bool Paused { get; set; }
+
+    //        public HttpModule(Configuration configuration)
+    //            : base(configuration)
+    //        {
+    //        }
+
+    //        public override void Configure()
+    //        {
+    //            WebServer = new WebServer(HandleRequest, "http://*:80/");
+    //            Activate();
+    //        }
+
+    //        public void Start() => WebServer.Run();
+    //        public void Stop() => WebServer.Stop();
+    //        public void Pause() => Paused = true;
+    //        public void Resume() => Paused = false;
+
+    //        /// <summary>
+    //        /// Callback to handle a http request.
+    //        /// </summary>
+    //        /// <param name="request">The http request.</param>
+    //        /// <returns>The http response.</returns>
+    //        public string HandleRequest(HttpListenerRequest request)
+    //        {
+    //            if (!Paused)
+    //            {
+    //                var contentType = request.ContentType;
+
+    //                switch (contentType)
+    //                {
+    //                    case "application/json": return HandleJsonRequest(request);
+    //                    default: return "501";
+    //                }
+    //            }
+
+    //            return "503";
+    //        }
+
+    //        private string HandleJsonRequest(HttpListenerRequest request)
+    //        {
+    //            if (request.HttpMethod != "POST") return "405";
+
+    //            var streamReader = new StreamReader(request.InputStream);
+    //            var body = streamReader.ReadToEnd();
+    //            var json = JsonConvert.DeserializeObject<Dictionary<string, object>>(body);
+
+    //            Configuration.Hub.PropagateCallback($"Incoming http request: {string.Join(", ", json.Select(node => $"{node.Key}: {node.Value}"))}");
+
+    //            return "OK";
+    //        }
+
+    //        public void Perform(Command command)
+    //        {
+    //            switch (command.Intent)
+    //            {
+    //                case GetIntent:
+    //                    break;
+
+    //                case PostIntent:
+    //                    PostRequest(command);
+    //                    break;
+    //            }
+    //        }
+
+    //        public void PostRequest(Command command)
+    //        {
+    //            using (var httpClient = new HttpClient())
+    //            {
+    //                // Get url from entity
+    //                var urlEntity = command.GetEntity(UrlEntity);
+
+    //                // Turn entities to form content
+    //                var requestContent = new FormUrlEncodedContent(
+    //                    command.Entities.Where(e => e.Name != UrlEntity).Select(e =>
+    //                        new KeyValuePair<string, string>(e.Name.Substring(1), e.Value)
+    //                    )
+    //                );
+
+    //                // Perform the request
+    //                var response = httpClient.PostAsync(urlEntity.Value, requestContent).GetAwaiter().GetResult();
+    //                if (response.IsSuccessStatusCode)
+    //                {
+    //                    Configuration.Hub.PropagateCallback("Request posted.");
+    //                }
+    //                else
+    //                {
+    //                    Configuration.Hub.PropagateCallback($"Something goes wrong, here the detail: {response.ReasonPhrase}");
+    //                }
+    //            }
+    //        }
+    //    }
 
     public class WebServer
     {

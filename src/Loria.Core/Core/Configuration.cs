@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Configuration;
 using System.Globalization;
+using System.Linq;
 using System.Resources;
 using System.Threading;
 
@@ -64,6 +67,25 @@ namespace LoriaNET
         internal Hub Hub { get; }
 
         /// <summary>
+        /// Loria's manager.
+        /// </summary>
+        internal Person Manager { get; set; }
+
+        /// <summary>
+        /// Loria's contacts.
+        /// </summary>
+        internal ObservableCollection<Person> Contacts { get; set; } = new ObservableCollection<Person>();
+
+        /// <summary>
+        /// Get a Loria's contact by its first name.
+        /// </summary>
+        internal Person GetPerson(string firstName)
+        {
+            if (Manager.Is(firstName)) return Manager;
+            return Contacts.FirstOrDefault(c => c.Is(firstName));
+        }
+
+        /// <summary>
         /// Create a basic configuration.
         /// </summary>
         public Configuration() : this(CultureInfo.CurrentUICulture) { }
@@ -75,6 +97,9 @@ namespace LoriaNET
         {
             // Set culture
             Culture = culture;
+
+            // Set manager
+            Manager = new Person() { FirstName = "Davy" };
 
             // Configure all modules
             Modules = new Modules(this);

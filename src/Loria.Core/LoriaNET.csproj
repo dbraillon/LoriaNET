@@ -56,10 +56,19 @@
     <Compile Include="Core\Entity.cs" />
     <Compile Include="Core\Hub.cs" />
     <Compile Include="Core\Modules\Module.cs" />
+    <Compile Include="Core\Person.cs" />
     <Compile Include="Modules\ConfigurationModule.cs" />
+    <Compile Include="Modules\Location\Coordinates.cs" />
+    <Compile Include="Modules\Location\Place.cs" />
+    <Compile Include="Modules\Location\Places.cs" />
+    <Compile Include="Modules\Location\Position.cs" />
+    <Compile Include="Modules\Location\Positions.cs" />
+    <Compile Include="Modules\Location\PositionState.cs" />
     <Compile Include="Modules\ReminderModule.cs" />
     <Compile Include="Modules\DateTimeModule.cs" />
+    <Compile Include="Modules\Revamped\IftttModule.cs" />
     <Compile Include="Modules\Revamped\LogModule.cs" />
+    <Compile Include="Modules\Location\LocationModule.cs" />
     <Compile Include="Modules\Revamped\SpotifyModule.cs" />
     <Compile Include="Modules\SpotifyModule.cs" />
     <Compile Include="Core\Actions\IAction.cs" />
@@ -90,6 +99,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Libraries\Loria.Google\Loria.Google.csproj">
+      <Project>{9A39AE98-6F33-489F-A4CB-FFA9875DAE96}</Project>
+      <Name>Loria.Google</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Libraries\Loria.Spotify\Loria.Spotify.csproj">
       <Project>{b5fa7cd5-bcf2-42e2-aa77-b719e7c3849f}</Project>
       <Name>Loria.Spotify</Name>

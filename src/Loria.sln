@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.12
+VisualStudioVersion = 15.0.26730.15
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoriaNET", "Loria.Core\LoriaNET.csproj", "{1EF35DB9-E062-4C14-98EF-80AA4B510BDA}"
 EndProject
@@ -16,6 +16,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Loria.Spotify", "Libraries\Loria.Spotify\Loria.Spotify.csproj", "{B5FA7CD5-BCF2-42E2-AA77-B719E7C3849F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Loria.Spotify.Test", "Libraries\Loria.Spotify.Test\Loria.Spotify.Test.csproj", "{52472918-A603-45B1-8257-EE3B5E50CEBC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Loria.Google", "Libraries\Loria.Google\Loria.Google.csproj", "{9A39AE98-6F33-489F-A4CB-FFA9875DAE96}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Loria.Google.Test", "Libraries\Loria.Google.Test\Loria.Google.Test.csproj", "{9F42351D-B1B7-4EA6-8481-95EDD0AFAE11}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,6 +47,14 @@ Global
 		{52472918-A603-45B1-8257-EE3B5E50CEBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{52472918-A603-45B1-8257-EE3B5E50CEBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{52472918-A603-45B1-8257-EE3B5E50CEBC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A39AE98-6F33-489F-A4CB-FFA9875DAE96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A39AE98-6F33-489F-A4CB-FFA9875DAE96}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A39AE98-6F33-489F-A4CB-FFA9875DAE96}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A39AE98-6F33-489F-A4CB-FFA9875DAE96}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F42351D-B1B7-4EA6-8481-95EDD0AFAE11}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F42351D-B1B7-4EA6-8481-95EDD0AFAE11}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F42351D-B1B7-4EA6-8481-95EDD0AFAE11}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F42351D-B1B7-4EA6-8481-95EDD0AFAE11}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -51,6 +63,8 @@ Global
 		{26F6DF79-FA0C-419F-8AE9-B7E82F5DD0D8} = {70A01D63-10BC-4B5D-B0FD-96667731E904}
 		{B5FA7CD5-BCF2-42E2-AA77-B719E7C3849F} = {21383DAC-9402-4FB0-BF3C-05F4B3059FC3}
 		{52472918-A603-45B1-8257-EE3B5E50CEBC} = {21383DAC-9402-4FB0-BF3C-05F4B3059FC3}
+		{9A39AE98-6F33-489F-A4CB-FFA9875DAE96} = {21383DAC-9402-4FB0-BF3C-05F4B3059FC3}
+		{9F42351D-B1B7-4EA6-8481-95EDD0AFAE11} = {21383DAC-9402-4FB0-BF3C-05F4B3059FC3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5FE41F66-BD7F-4AE9-8808-85C9AA2D1843}
