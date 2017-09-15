@@ -126,8 +126,44 @@
   <data name="GeneralAt" xml:space="preserve">
     <value>À</value>
   </data>
+  <data name="GeneralDone" xml:space="preserve">
+    <value>C'est fait.</value>
+  </data>
   <data name="GeneralFor" xml:space="preserve">
     <value>Pour</value>
+  </data>
+  <data name="LocationModuleCoordinatesNotFound" xml:space="preserve">
+    <value>Tu ne m'as pas donné de coordonnées.</value>
+  </data>
+  <data name="LocationModuleDescription" xml:space="preserve">
+    <value>Le module de localisation permet à Loria de garder un suivi de la localisation des personnes qu'elle a rencontré.</value>
+  </data>
+  <data name="LocationModuleIDontKnow" xml:space="preserve">
+    <value>Je ne sais pas.</value>
+  </data>
+  <data name="LocationModuleName" xml:space="preserve">
+    <value>Module de localisation</value>
+  </data>
+  <data name="LocationModulePersonNotFound" xml:space="preserve">
+    <value>Tu ne m'as pas donné de personne.</value>
+  </data>
+  <data name="LocationModulePersonUnknown" xml:space="preserve">
+    <value>Je n'ai jamais rencontré cette personne.</value>
+  </data>
+  <data name="LocationModulePlaceNotFound" xml:space="preserve">
+    <value>Tu ne m'as pas donné d'endroit.</value>
+  </data>
+  <data name="LocationModulePlaceUnknown" xml:space="preserve">
+    <value>Je ne connais pas cet endroit.</value>
+  </data>
+  <data name="LocationModulePositionAt" xml:space="preserve">
+    <value>est à</value>
+  </data>
+  <data name="LocationModulePositionEnter" xml:space="preserve">
+    <value>est entré à</value>
+  </data>
+  <data name="LocationModulePositionLeave" xml:space="preserve">
+    <value>est sortie de</value>
   </data>
   <data name="ReminderCreateConfirmation" xml:space="preserve">
     <value>Je vous rappelle de</value>

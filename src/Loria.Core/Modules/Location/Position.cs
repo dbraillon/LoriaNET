@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LoriaNET.Resources;
+using System;
 
 namespace LoriaNET.Location
 {
@@ -46,15 +47,15 @@ namespace LoriaNET.Location
         public override string ToString()
         {
             var state =
-                State == PositionState.At ? "is at" :
-                State == PositionState.Enter ? "enter" :
-                State == PositionState.Leave ? "leave" :
-                throw new NotImplementedException($"State {State} has not been implemented");
+                State == PositionState.At ? Strings.LocationModulePositionAt :
+                State == PositionState.Enter ? Strings.LocationModulePositionEnter :
+                State == PositionState.Leave ? Strings.LocationModulePositionLeave :
+                string.Empty;
 
             var position =
                 Place != null ? Place.ToString() :
                 Coordinates != null ? Coordinates.ToString() :
-                "... I don't know";
+                Strings.LocationModuleIDontKnow;
 
             return $"{Person} {state} {position}";
         }

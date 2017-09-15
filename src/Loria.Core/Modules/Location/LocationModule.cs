@@ -1,4 +1,5 @@
 ﻿using Loria.Google;
+using LoriaNET.Resources;
 using System;
 using System.Collections.Specialized;
 using System.Linq;
@@ -7,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace LoriaNET.Location
 {
+    /// <summary>
+    /// The location module provides intents and entities to keep track of people location.
+    /// </summary>
     public class LocationModule : Module, IAction
     {
         public const string SetIntent = "set";
@@ -20,9 +24,9 @@ namespace LoriaNET.Location
         public const string PlaceEntity = "place";
         public const string CoordinatesEntity = "coordinates";
         
-        public override string Name => "Presence module";
+        public override string Name => Strings.LocationModuleName;
 
-        public string Description => "Tell Loria where you are!";
+        public string Description => Strings.LocationModuleDescription;
 
         public string Command => "location";
 
@@ -155,21 +159,21 @@ namespace LoriaNET.Location
             var forEntity = command.GetEntity(ForEntity);
             if (forEntity == null)
             {
-                Configuration.Hub.PropagateCallback("You didn't tell me a person");
+                Configuration.Hub.PropagateCallback(Strings.LocationModulePersonNotFound);
                 return;
             }
 
             var coordinatesEntity = command.GetEntity(CoordinatesEntity);
             if (coordinatesEntity == null)
             {
-                Configuration.Hub.PropagateCallback("You didn't tell me coordinates");
+                Configuration.Hub.PropagateCallback(Strings.LocationModuleCoordinatesNotFound);
                 return;
             }
 
             var person = Configuration.GetPerson(forEntity.Value);
             if (person == null)
             {
-                Configuration.Hub.PropagateCallback("I've never met this person.");
+                Configuration.Hub.PropagateCallback(Strings.LocationModulePersonUnknown);
                 return;
             }
 
@@ -181,14 +185,14 @@ namespace LoriaNET.Location
             var forEntity = command.GetEntity(ForEntity);
             if (forEntity == null)
             {
-                Configuration.Hub.PropagateCallback("You didn't tell me a person");
+                Configuration.Hub.PropagateCallback(Strings.LocationModulePersonNotFound);
                 return;
             }
 
             var person = Configuration.GetPerson(forEntity.Value);
             if (person == null)
             {
-                Configuration.Hub.PropagateCallback("I've never met this person.");
+                Configuration.Hub.PropagateCallback(Strings.LocationModulePersonUnknown);
                 return;
             }
 
@@ -201,28 +205,28 @@ namespace LoriaNET.Location
             var forEntity = command.GetEntity(ForEntity);
             if (forEntity == null)
             {
-                Configuration.Hub.PropagateCallback("You didn't tell me a person");
+                Configuration.Hub.PropagateCallback(Strings.LocationModulePersonNotFound);
                 return;
             }
 
             var placeEntity = command.GetEntity(PlaceEntity);
             if (placeEntity == null)
             {
-                Configuration.Hub.PropagateCallback("You didn't tell me a place");
+                Configuration.Hub.PropagateCallback(Strings.LocationModulePlaceNotFound);
                 return;
             }
 
             var person = Configuration.GetPerson(forEntity.Value);
             if (person == null)
             {
-                Configuration.Hub.PropagateCallback("I've never met this person.");
+                Configuration.Hub.PropagateCallback(Strings.LocationModulePersonUnknown);
                 return;
             }
 
             var place = Places.Get(placeEntity.Value);
             if (place == null)
             {
-                Configuration.Hub.PropagateCallback("I don't know this place");
+                Configuration.Hub.PropagateCallback(Strings.LocationModulePlaceUnknown);
                 return;
             }
 
@@ -234,28 +238,28 @@ namespace LoriaNET.Location
             var forEntity = command.GetEntity(ForEntity);
             if (forEntity == null)
             {
-                Configuration.Hub.PropagateCallback("You didn't tell me a person");
+                Configuration.Hub.PropagateCallback(Strings.LocationModulePersonNotFound);
                 return;
             }
 
             var placeEntity = command.GetEntity(PlaceEntity);
             if (placeEntity == null)
             {
-                Configuration.Hub.PropagateCallback("You didn't tell me a place");
+                Configuration.Hub.PropagateCallback(Strings.LocationModulePlaceNotFound);
                 return;
             }
 
             var person = Configuration.GetPerson(forEntity.Value);
             if (person == null)
             {
-                Configuration.Hub.PropagateCallback("I've never met this person.");
+                Configuration.Hub.PropagateCallback(Strings.LocationModulePersonUnknown);
                 return;
             }
 
             var place = Places.Get(placeEntity.Value);
             if (place == null)
             {
-                Configuration.Hub.PropagateCallback("I don't know this place");
+                Configuration.Hub.PropagateCallback(Strings.LocationModulePlaceUnknown);
                 return;
             }
 
@@ -267,14 +271,14 @@ namespace LoriaNET.Location
             var coordinatesEntity = command.GetEntity(CoordinatesEntity);
             if (coordinatesEntity == null)
             {
-                Configuration.Hub.PropagateCallback("You didn't tell me coordinates");
+                Configuration.Hub.PropagateCallback(Strings.LocationModuleCoordinatesNotFound);
                 return;
             }
 
             var placeEntity = command.GetEntity(PlaceEntity);
             if (placeEntity == null)
             {
-                Configuration.Hub.PropagateCallback("You didn't tell me a place");
+                Configuration.Hub.PropagateCallback(Strings.LocationModulePlaceNotFound);
                 return;
             }
 
@@ -287,7 +291,7 @@ namespace LoriaNET.Location
             var placeEntity = command.GetEntity(PlaceEntity);
             if (placeEntity == null)
             {
-                Configuration.Hub.PropagateCallback("You didn't tell me a place");
+                Configuration.Hub.PropagateCallback(Strings.LocationModulePlaceNotFound);
                 return;
             }
 

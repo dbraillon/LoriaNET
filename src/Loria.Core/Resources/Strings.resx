@@ -126,8 +126,44 @@
   <data name="GeneralAt" xml:space="preserve">
     <value>At</value>
   </data>
+  <data name="GeneralDone" xml:space="preserve">
+    <value>Done.</value>
+  </data>
   <data name="GeneralFor" xml:space="preserve">
     <value>For</value>
+  </data>
+  <data name="LocationModuleCoordinatesNotFound" xml:space="preserve">
+    <value>You did not give me coordinates.</value>
+  </data>
+  <data name="LocationModuleDescription" xml:space="preserve">
+    <value>Location module allows Loria to keep track of people location.</value>
+  </data>
+  <data name="LocationModuleIDontKnow" xml:space="preserve">
+    <value>I don't know.</value>
+  </data>
+  <data name="LocationModuleName" xml:space="preserve">
+    <value>Location module</value>
+  </data>
+  <data name="LocationModulePersonNotFound" xml:space="preserve">
+    <value>You did not give me a person.</value>
+  </data>
+  <data name="LocationModulePersonUnknown" xml:space="preserve">
+    <value>I've never met that person.</value>
+  </data>
+  <data name="LocationModulePlaceNotFound" xml:space="preserve">
+    <value>You did not give me a place.</value>
+  </data>
+  <data name="LocationModulePlaceUnknown" xml:space="preserve">
+    <value>I don't know this place.</value>
+  </data>
+  <data name="LocationModulePositionAt" xml:space="preserve">
+    <value>is at</value>
+  </data>
+  <data name="LocationModulePositionEnter" xml:space="preserve">
+    <value>enter</value>
+  </data>
+  <data name="LocationModulePositionLeave" xml:space="preserve">
+    <value>leave</value>
   </data>
   <data name="ReminderCreateConfirmation" xml:space="preserve">
     <value>I will remind you to</value>

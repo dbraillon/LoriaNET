@@ -19,7 +19,7 @@ namespace LoriaNET.Resources {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Strings {
@@ -88,11 +88,119 @@ namespace LoriaNET.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Done..
+        /// </summary>
+        internal static string GeneralDone {
+            get {
+                return ResourceManager.GetString("GeneralDone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to For.
         /// </summary>
         internal static string GeneralFor {
             get {
                 return ResourceManager.GetString("GeneralFor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You did not give me coordinates..
+        /// </summary>
+        internal static string LocationModuleCoordinatesNotFound {
+            get {
+                return ResourceManager.GetString("LocationModuleCoordinatesNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Location module allows Loria to keep track of people location..
+        /// </summary>
+        internal static string LocationModuleDescription {
+            get {
+                return ResourceManager.GetString("LocationModuleDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to I don&apos;t know..
+        /// </summary>
+        internal static string LocationModuleIDontKnow {
+            get {
+                return ResourceManager.GetString("LocationModuleIDontKnow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Location module.
+        /// </summary>
+        internal static string LocationModuleName {
+            get {
+                return ResourceManager.GetString("LocationModuleName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You did not give me a person..
+        /// </summary>
+        internal static string LocationModulePersonNotFound {
+            get {
+                return ResourceManager.GetString("LocationModulePersonNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to I&apos;ve never met that person..
+        /// </summary>
+        internal static string LocationModulePersonUnknown {
+            get {
+                return ResourceManager.GetString("LocationModulePersonUnknown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You did not give me a place..
+        /// </summary>
+        internal static string LocationModulePlaceNotFound {
+            get {
+                return ResourceManager.GetString("LocationModulePlaceNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to I don&apos;t know this place..
+        /// </summary>
+        internal static string LocationModulePlaceUnknown {
+            get {
+                return ResourceManager.GetString("LocationModulePlaceUnknown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to is at.
+        /// </summary>
+        internal static string LocationModulePositionAt {
+            get {
+                return ResourceManager.GetString("LocationModulePositionAt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to enter.
+        /// </summary>
+        internal static string LocationModulePositionEnter {
+            get {
+                return ResourceManager.GetString("LocationModulePositionEnter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to leave.
+        /// </summary>
+        internal static string LocationModulePositionLeave {
+            get {
+                return ResourceManager.GetString("LocationModulePositionLeave", resourceCulture);
             }
         }
         
