@@ -8,6 +8,9 @@ using System.Text;
 
 namespace LoriaNET
 {
+    /// <summary>
+    /// The IFTTT module provides intents and entities to interact with IFTTT webhook module.
+    /// </summary>
     internal sealed class IftttModule : Module, IListener, ICallback
     {
         public override string Name => "IFTTT module";
@@ -107,7 +110,6 @@ namespace LoriaNET
                 Configuration.Hub.PropagateCommand(new Command(command.Trim()));
             }
             
-
             return "OK";
         }
     }

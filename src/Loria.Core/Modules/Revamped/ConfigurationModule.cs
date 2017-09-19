@@ -3,12 +3,12 @@ using System.Linq;
 
 namespace LoriaNET
 {
-    internal sealed class ConfigurationModule : IModule, IAction
+    internal sealed class ConfigurationModule : Module, IAction
     {
         const string SetIntent = "set";
         const string GetIntent = "get";
 
-        public string Name => "Configuration module";
+        public override string Name => "Configuration module";
         public string Description => "Get or set a property value of configuration object";
 
         public string Command => "conf";
@@ -21,31 +21,19 @@ namespace LoriaNET
         };
         public string[] Samples => new string[]
         {
-            "Set culture to french",
-            "Get culture",
-            "Get voice api key"
+            "conf set spotify::APIKey ABCDEF",
+            "conf get spotify::APIKey"
         };
-
-        public Configuration Configuration { get; set; }
-
+        
         public ConfigurationModule(Configuration configuration)
-        {
-            Configuration = configuration;
-        }
-
-        public void Activate()
+            : base (configuration)
         {
         }
 
-        public void Deactivate()
+        public override void Configure()
         {
+            Activate();
         }
-
-        public void Configure()
-        {
-        }
-
-        public bool IsEnabled() => true;
 
         public void Perform(Command command)
         {

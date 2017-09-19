@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace LoriaNET
 {
-    public class HelpModule : IModule, IAction
+    public class HelpModule : Module, IAction
     {
-        public string Name => "Help module";
+        public override string Name => "Help module";
         public string Description => "Give you tips on command";
 
         public string Command => "help";
@@ -18,34 +16,18 @@ namespace LoriaNET
         };
         public string[] Samples => new string[]
         {
-            "Help voice module",
-            "Give me help for reminder module",
-            "How http module works"
+            "help spotify"
         };
 
-        public Configuration Configuration { get; set; }
-
         public HelpModule(Configuration configuration)
+            : base(configuration)
         {
-            Configuration = configuration;
         }
 
-        public void Activate()
+        public override void Configure()
         {
-            // Help module is always activated
+            Activate();
         }
-
-        public void Configure()
-        {
-            // Nothing to configure
-        }
-
-        public void Deactivate()
-        {
-            // Help module is always activated
-        }
-
-        public bool IsEnabled() => true;
 
         public void Perform(Command command)
         {

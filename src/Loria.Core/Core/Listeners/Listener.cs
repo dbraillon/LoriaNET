@@ -5,17 +5,12 @@ namespace LoriaNET
     /// <summary>
     /// A class providing a simple way to implement the listener interface.
     /// </summary>
-    internal abstract class Listener : IListener
+    public abstract class Listener : Module, IListener
     {
         /// <summary>
         /// Time in milliseconds to wait between loop.
         /// </summary>
         protected int MillisecondsSleep { get; }
-
-        /// <summary>
-        /// Loria's configuration.
-        /// </summary>
-        protected Configuration Configuration { get; }
 
         /// <summary>
         /// Listener thread.
@@ -33,16 +28,12 @@ namespace LoriaNET
         protected bool IsPaused { get; set; }
 
         /// <summary>
-        /// Name of listener.
-        /// </summary>
-        public abstract string Name { get; }
-
-        /// <summary>
         /// Create a new instance of listener.
         /// </summary>
         /// <param name="configuration">Loria's configuration.</param>
         /// <param name="millisecondsSleep">Time in milliseconds to wait between loop.</param>
-        internal Listener(Configuration configuration, int millisecondsSleep)
+        public Listener(Configuration configuration, int millisecondsSleep)
+            : base(configuration)
         {
             Configuration = configuration;
             MillisecondsSleep = millisecondsSleep;

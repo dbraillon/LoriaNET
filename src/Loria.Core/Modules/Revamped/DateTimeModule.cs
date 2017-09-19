@@ -5,12 +5,12 @@ namespace LoriaNET
     /// <summary>
     /// The date time module provides intents and entities for giving the date and time.
     /// </summary>
-    internal sealed class DateTimeModule : IModule, IAction
+    internal sealed class DateTimeModule : Module, IAction
     {
         const string DateIntent = "date";
         const string TimeIntent = "time";
 
-        public string Name => "Date time module";
+        public override string Name => "Date time module";
         public string Description => "Give you the current date";
 
         public string Command => "datetime";
@@ -23,53 +23,20 @@ namespace LoriaNET
         };
         public string[] Samples => new string[]
         {
-            "What time is it",
-            "What is the date",
-            "Can you give me the time please"
+            "datetime date",
+            "datetime time"
         };
-
-        /// <summary>
-        /// Loria's configuration.
-        /// </summary>
-        public Configuration Configuration { get; set; }
-
-        /// <summary>
-        /// Create the date time module.
-        /// </summary>
-        /// <param name="configuration">Loria's configuration.</param>
+        
         public DateTimeModule(Configuration configuration)
-        {
-            Configuration = configuration;
-        }
-
-        /// <summary>
-        /// Configure the date time module.
-        /// </summary>
-        public void Configure()
-        {
-            // Nothing to configure
-        }
-
-        /// <summary>
-        /// Check if date time module is enabled.
-        /// </summary>
-        /// <returns>State of date time module.</returns>
-        public bool IsEnabled() => true;
-
-        /// <summary>
-        /// Activate the date time module.
-        /// </summary>
-        public void Activate()
+            : base(configuration)
         {
         }
 
-        /// <summary>
-        /// Deactivate the date time module.
-        /// </summary>
-        public void Deactivate()
+        public override void Configure()
         {
+            Activate();
         }
-
+        
         /// <summary>
         /// Perform the action and intents.
         /// </summary>
