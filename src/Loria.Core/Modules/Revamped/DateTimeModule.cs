@@ -5,7 +5,7 @@ namespace LoriaNET
     /// <summary>
     /// The date time module provides intents and entities for giving the date and time.
     /// </summary>
-    internal sealed class DateTimeModule : Module, IAction
+    public sealed class DateTimeModule : Module, IAction
     {
         const string DateIntent = "date";
         const string TimeIntent = "time";
@@ -27,8 +27,8 @@ namespace LoriaNET
             "datetime time"
         };
         
-        public DateTimeModule(Configuration configuration)
-            : base(configuration)
+        public DateTimeModule(Loria loria)
+            : base(loria)
         {
         }
 
@@ -47,18 +47,18 @@ namespace LoriaNET
             {
                 case DateIntent:
 
-                    var todayDate = DateTime.Now.ToString("D", Configuration.Culture);
-                    Configuration.Hub.PropagateCallback(todayDate);
+                    var todayDate = DateTime.Now.ToString("D", Loria.Data.Culture);
+                    Loria.Hub.PropagateCallback(todayDate);
                     break;
 
                 case TimeIntent:
 
-                    var todayTime = DateTime.Now.ToString("t", Configuration.Culture);
-                    Configuration.Hub.PropagateCallback(todayTime);
+                    var todayTime = DateTime.Now.ToString("t", Loria.Data.Culture);
+                    Loria.Hub.PropagateCallback(todayTime);
                     break;
 
                 default:
-                    Configuration.Hub.PropagateCallback(Resources.Strings.DateTimeIntentNotUnderstood);
+                    Loria.Hub.PropagateCallback(Resources.Strings.DateTimeIntentNotUnderstood);
                     break;
             }
         }

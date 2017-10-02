@@ -5,7 +5,7 @@
 
 //namespace LoriaNET
 //{
-//    internal sealed class VoiceModule : Listener, IModule, IAction, ICallback
+//    public sealed class VoiceModule : Listener, IModule, IAction, ICallback
 //    {
 //        const string MicrosoftCognitiveApiKey = "voice::MicrosoftCognitiveApiKey";
 //        public const string LuisAppId = "voice::LuisAppId";
@@ -61,7 +61,7 @@
 //        /// Create the voice module.
 //        /// </summary>
 //        /// <param name="configuration">Loria's configuration.</param>
-//        public VoiceModule(Configuration configuration)
+//        public VoiceModule(Loria loria)
 //            : base(configuration, 1)
 //        {
 //        }
@@ -93,7 +93,7 @@
 //            }
 
 //            Enabled = true;
-//            SpeechToText = new SpeechToText(microsoftCognitiveApiKey, Configuration.Culture, luisAppId, luisSubscriptionId);
+//            SpeechToText = new SpeechToText(microsoftCognitiveApiKey, Loria.Data.Culture, luisAppId, luisSubscriptionId);
 //            SpeechToText.OnSpeechRecognized += (r) =>
 //            {
 //                var intent = r.Intents.Where(i => i.Intent != "None").First();
@@ -116,7 +116,7 @@
 //            };
 //            TextToSpeech = new TextToSpeech(microsoftCognitiveApiKey);
 
-//            SpeechRecognitionEngine = new SpeechRecognitionEngine(Configuration.Culture);
+//            SpeechRecognitionEngine = new SpeechRecognitionEngine(Loria.Data.Culture);
 //            SpeechRecognitionEngine.SetInputToDefaultAudioDevice();
 //            SpeechRecognitionEngine.SpeechRecognized += (s, e) =>
 //            {
@@ -132,7 +132,7 @@
 //                new Grammar(
 //                    new GrammarBuilder("loria")
 //                    {
-//                        Culture = Configuration.Culture
+//                        Culture = Loria.Data.Culture
 //                    }
 //                )
 //            );
@@ -160,7 +160,7 @@
 //        /// <param name="message">A message to tell.</param>
 //        public void Callback(string message)
 //        {
-//            TextToSpeech.RequestAsync(message, Configuration.Culture).GetAwaiter().GetResult();
+//            TextToSpeech.RequestAsync(message, Loria.Data.Culture).GetAwaiter().GetResult();
 //        }
 
 //        /// <summary>

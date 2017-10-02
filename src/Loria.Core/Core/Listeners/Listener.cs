@@ -32,10 +32,10 @@ namespace LoriaNET
         /// </summary>
         /// <param name="configuration">Loria's configuration.</param>
         /// <param name="millisecondsSleep">Time in milliseconds to wait between loop.</param>
-        public Listener(Configuration configuration, int millisecondsSleep)
-            : base(configuration)
+        public Listener(Loria loria, int millisecondsSleep)
+            : base(loria)
         {
-            Configuration = configuration;
+            Loria = loria;
             MillisecondsSleep = millisecondsSleep;
 
             Thread = new Thread(Loop);
@@ -98,7 +98,7 @@ namespace LoriaNET
             {
                 if (!IsPaused)
                 {
-                    Configuration.Hub.Propagate(Listen());
+                    Loria.Hub.Propagate(Listen());
                 }
 
                 Thread.Sleep(MillisecondsSleep);

@@ -22,21 +22,21 @@ namespace LoriaNET.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Strings {
+    public class Strings {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Strings() {
+        public Strings() {
         }
         
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("LoriaNET.Resources.Strings", typeof(Strings).Assembly);
@@ -51,7 +51,7 @@ namespace LoriaNET.Resources {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace LoriaNET.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Command does not exist or corresponding module is disabled..
         /// </summary>
-        internal static string CommandNotFound {
+        public static string CommandNotFound {
             get {
                 return ResourceManager.GetString("CommandNotFound", resourceCulture);
             }
@@ -72,7 +72,7 @@ namespace LoriaNET.Resources {
         /// <summary>
         ///   Looks up a localized string similar to You can&apos;t do that with date time..
         /// </summary>
-        internal static string DateTimeIntentNotUnderstood {
+        public static string DateTimeIntentNotUnderstood {
             get {
                 return ResourceManager.GetString("DateTimeIntentNotUnderstood", resourceCulture);
             }
@@ -81,7 +81,7 @@ namespace LoriaNET.Resources {
         /// <summary>
         ///   Looks up a localized string similar to At.
         /// </summary>
-        internal static string GeneralAt {
+        public static string GeneralAt {
             get {
                 return ResourceManager.GetString("GeneralAt", resourceCulture);
             }
@@ -90,7 +90,7 @@ namespace LoriaNET.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Done..
         /// </summary>
-        internal static string GeneralDone {
+        public static string GeneralDone {
             get {
                 return ResourceManager.GetString("GeneralDone", resourceCulture);
             }
@@ -99,7 +99,7 @@ namespace LoriaNET.Resources {
         /// <summary>
         ///   Looks up a localized string similar to For.
         /// </summary>
-        internal static string GeneralFor {
+        public static string GeneralFor {
             get {
                 return ResourceManager.GetString("GeneralFor", resourceCulture);
             }
@@ -108,7 +108,7 @@ namespace LoriaNET.Resources {
         /// <summary>
         ///   Looks up a localized string similar to You did not give me coordinates..
         /// </summary>
-        internal static string LocationModuleCoordinatesNotFound {
+        public static string LocationModuleCoordinatesNotFound {
             get {
                 return ResourceManager.GetString("LocationModuleCoordinatesNotFound", resourceCulture);
             }
@@ -117,7 +117,7 @@ namespace LoriaNET.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Location module allows Loria to keep track of people location..
         /// </summary>
-        internal static string LocationModuleDescription {
+        public static string LocationModuleDescription {
             get {
                 return ResourceManager.GetString("LocationModuleDescription", resourceCulture);
             }
@@ -126,7 +126,7 @@ namespace LoriaNET.Resources {
         /// <summary>
         ///   Looks up a localized string similar to I don&apos;t know..
         /// </summary>
-        internal static string LocationModuleIDontKnow {
+        public static string LocationModuleIDontKnow {
             get {
                 return ResourceManager.GetString("LocationModuleIDontKnow", resourceCulture);
             }
@@ -135,7 +135,7 @@ namespace LoriaNET.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Location module.
         /// </summary>
-        internal static string LocationModuleName {
+        public static string LocationModuleName {
             get {
                 return ResourceManager.GetString("LocationModuleName", resourceCulture);
             }
@@ -144,7 +144,7 @@ namespace LoriaNET.Resources {
         /// <summary>
         ///   Looks up a localized string similar to You did not give me a person..
         /// </summary>
-        internal static string LocationModulePersonNotFound {
+        public static string LocationModulePersonNotFound {
             get {
                 return ResourceManager.GetString("LocationModulePersonNotFound", resourceCulture);
             }
@@ -153,7 +153,7 @@ namespace LoriaNET.Resources {
         /// <summary>
         ///   Looks up a localized string similar to I&apos;ve never met that person..
         /// </summary>
-        internal static string LocationModulePersonUnknown {
+        public static string LocationModulePersonUnknown {
             get {
                 return ResourceManager.GetString("LocationModulePersonUnknown", resourceCulture);
             }
@@ -162,7 +162,7 @@ namespace LoriaNET.Resources {
         /// <summary>
         ///   Looks up a localized string similar to You did not give me a place..
         /// </summary>
-        internal static string LocationModulePlaceNotFound {
+        public static string LocationModulePlaceNotFound {
             get {
                 return ResourceManager.GetString("LocationModulePlaceNotFound", resourceCulture);
             }
@@ -171,7 +171,7 @@ namespace LoriaNET.Resources {
         /// <summary>
         ///   Looks up a localized string similar to I don&apos;t know this place..
         /// </summary>
-        internal static string LocationModulePlaceUnknown {
+        public static string LocationModulePlaceUnknown {
             get {
                 return ResourceManager.GetString("LocationModulePlaceUnknown", resourceCulture);
             }
@@ -180,7 +180,7 @@ namespace LoriaNET.Resources {
         /// <summary>
         ///   Looks up a localized string similar to is at.
         /// </summary>
-        internal static string LocationModulePositionAt {
+        public static string LocationModulePositionAt {
             get {
                 return ResourceManager.GetString("LocationModulePositionAt", resourceCulture);
             }
@@ -189,7 +189,7 @@ namespace LoriaNET.Resources {
         /// <summary>
         ///   Looks up a localized string similar to enter.
         /// </summary>
-        internal static string LocationModulePositionEnter {
+        public static string LocationModulePositionEnter {
             get {
                 return ResourceManager.GetString("LocationModulePositionEnter", resourceCulture);
             }
@@ -198,7 +198,7 @@ namespace LoriaNET.Resources {
         /// <summary>
         ///   Looks up a localized string similar to leave.
         /// </summary>
-        internal static string LocationModulePositionLeave {
+        public static string LocationModulePositionLeave {
             get {
                 return ResourceManager.GetString("LocationModulePositionLeave", resourceCulture);
             }
@@ -207,7 +207,7 @@ namespace LoriaNET.Resources {
         /// <summary>
         ///   Looks up a localized string similar to I will remind you to.
         /// </summary>
-        internal static string ReminderCreateConfirmation {
+        public static string ReminderCreateConfirmation {
             get {
                 return ResourceManager.GetString("ReminderCreateConfirmation", resourceCulture);
             }
@@ -216,7 +216,7 @@ namespace LoriaNET.Resources {
         /// <summary>
         ///   Looks up a localized string similar to You have to give me a date when the reminder should fire..
         /// </summary>
-        internal static string ReminderDateNotFound {
+        public static string ReminderDateNotFound {
             get {
                 return ResourceManager.GetString("ReminderDateNotFound", resourceCulture);
             }
@@ -225,7 +225,7 @@ namespace LoriaNET.Resources {
         /// <summary>
         ///   Looks up a localized string similar to You give me a date that I don&apos;t understand..
         /// </summary>
-        internal static string ReminderDateNotUnderstood {
+        public static string ReminderDateNotUnderstood {
             get {
                 return ResourceManager.GetString("ReminderDateNotUnderstood", resourceCulture);
             }
@@ -234,7 +234,7 @@ namespace LoriaNET.Resources {
         /// <summary>
         ///   Looks up a localized string similar to You can&apos;t do that with reminder..
         /// </summary>
-        internal static string ReminderIntentNotUnderstood {
+        public static string ReminderIntentNotUnderstood {
             get {
                 return ResourceManager.GetString("ReminderIntentNotUnderstood", resourceCulture);
             }
@@ -243,7 +243,7 @@ namespace LoriaNET.Resources {
         /// <summary>
         ///   Looks up a localized string similar to You have to give me a text to remind..
         /// </summary>
-        internal static string ReminderTextNotFound {
+        public static string ReminderTextNotFound {
             get {
                 return ResourceManager.GetString("ReminderTextNotFound", resourceCulture);
             }
@@ -252,7 +252,7 @@ namespace LoriaNET.Resources {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
-        internal static string VoiceMicrosoftCognitiveServiceApiKeyNotFound {
+        public static string VoiceMicrosoftCognitiveServiceApiKeyNotFound {
             get {
                 return ResourceManager.GetString("VoiceMicrosoftCognitiveServiceApiKeyNotFound", resourceCulture);
             }
@@ -261,7 +261,7 @@ namespace LoriaNET.Resources {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
-        internal static string VoiceMicrosoftLuisApiKeyNotFound {
+        public static string VoiceMicrosoftLuisApiKeyNotFound {
             get {
                 return ResourceManager.GetString("VoiceMicrosoftLuisApiKeyNotFound", resourceCulture);
             }
@@ -270,7 +270,7 @@ namespace LoriaNET.Resources {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
-        internal static string VoiceMicrosoftLuisAppIdNotFound {
+        public static string VoiceMicrosoftLuisAppIdNotFound {
             get {
                 return ResourceManager.GetString("VoiceMicrosoftLuisAppIdNotFound", resourceCulture);
             }

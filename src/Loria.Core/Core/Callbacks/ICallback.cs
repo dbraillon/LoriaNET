@@ -3,7 +3,7 @@
     /// <summary>
     /// An interface to make callbacks for Loria.
     /// </summary>
-    internal interface ICallback
+    public interface ICallback
     {
         string Name { get; }
 

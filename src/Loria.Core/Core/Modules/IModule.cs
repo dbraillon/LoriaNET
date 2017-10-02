@@ -3,7 +3,7 @@
     /// <summary>
     /// An interface to make modules for Loria.
     /// </summary>
-    internal interface IModule
+    public interface IModule
     {
         string Name { get; }
 

@@ -43,8 +43,8 @@ namespace LoriaNET.Reminder
         
         public List<Alarm> Reminders { get; set; }
         
-        public ReminderModule(Configuration configuration)
-            : base(configuration, 1000)
+        public ReminderModule(Loria loria)
+            : base(loria, 1000)
         {
             Reminders = new List<Alarm>();
         }
@@ -67,25 +67,25 @@ namespace LoriaNET.Reminder
                     // Give error messages if something is wrong with the command
                     if (textEntity == null || string.IsNullOrEmpty(textEntity.Value))
                     {
-                        Configuration.Hub.PropagateCallback(Resources.Strings.ReminderTextNotFound);
+                        Loria.Hub.PropagateCallback(Resources.Strings.ReminderTextNotFound);
                         return;
                     }
 
                     // Give error messages if something is wrong with the command
                     if (dateEntity == null || string.IsNullOrEmpty(dateEntity.Value))
                     {
-                        Configuration.Hub.PropagateCallback(Resources.Strings.ReminderDateNotFound);
+                        Loria.Hub.PropagateCallback(Resources.Strings.ReminderDateNotFound);
                         return;
                     }
 
                     // Parse given date
-                    if (DateTime.TryParseExact(dateEntity.Value, new string[] { "yyyyMMddHHmm", "yyyy-MM-ddTHH:mm", "yyyy-MM-ddTHH" }, Configuration.Culture, DateTimeStyles.None, out DateTime date))
+                    if (DateTime.TryParseExact(dateEntity.Value, new string[] { "yyyyMMddHHmm", "yyyy-MM-ddTHH:mm", "yyyy-MM-ddTHH" }, Loria.Data.Culture, DateTimeStyles.None, out DateTime date))
                     {
                         // Create the reminder
                         Reminders.Add(new Alarm(textEntity.Value, date));
 
                         // Callback what Loria understood
-                        Configuration.Hub.PropagateCallback(
+                        Loria.Hub.PropagateCallback(
                             string.Join(" ",
                                 Resources.Strings.ReminderCreateConfirmation,
                                 textEntity.Value,
@@ -98,7 +98,7 @@ namespace LoriaNET.Reminder
                     }
                     else
                     {
-                        Configuration.Hub.PropagateCallback(Resources.Strings.ReminderDateNotUnderstood);
+                        Loria.Hub.PropagateCallback(Resources.Strings.ReminderDateNotUnderstood);
                     }
 
                     break;
@@ -113,7 +113,7 @@ namespace LoriaNET.Reminder
                     break;
 
                 default:
-                    Configuration.Hub.PropagateCallback(Resources.Strings.ReminderIntentNotUnderstood);
+                    Loria.Hub.PropagateCallback(Resources.Strings.ReminderIntentNotUnderstood);
                     break;
             }
         }

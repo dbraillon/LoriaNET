@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LoriaNET.Storage;
+using System;
 using System.Linq;
 
 namespace LoriaNET
@@ -6,20 +7,20 @@ namespace LoriaNET
     /// <summary>
     /// Loria's hub object, used to propagate commands or callbacks to every modules.
     /// </summary>
-    internal sealed class Hub
+    public sealed class Hub
     {
         /// <summary>
         /// Loria's configuration.
         /// </summary>
-        internal Configuration Configuration { get; }
+        public Loria Loria { get; }
 
         /// <summary>
         /// Create a new instance of Loria's hub.
         /// </summary>
         /// <param name="configuration">Loria's configuration.</param>
-        internal Hub(Configuration configuration)
+        public Hub(Loria loria)
         {
-            Configuration = configuration;
+            Loria = loria;
         }
         
         /// <summary>
@@ -29,7 +30,7 @@ namespace LoriaNET
         ///     By default a command, unless the phrase is prefixed 
         ///     with callback keyword.
         /// </param>
-        internal void Propagate(string commandOrCallback)
+        public void Propagate(string commandOrCallback)
         {
             if (string.IsNullOrEmpty(commandOrCallback)) return;
 
@@ -52,12 +53,12 @@ namespace LoriaNET
         /// Propagate a command to corresponding enabled action.
         /// </summary>
         /// <param name="command">A command.</param>
-        internal void PropagateCommand(Command command)
+        public void PropagateCommand(Command command)
         {
             if (command == null) return;
             
             // Try to find corresponding action
-            var action = Configuration.Actions.GetByCommand(command.Module);
+            var action = Loria.Actions.GetByCommand(command.Module);
             if (action != null)
             {
                 // If an action match the command, perform it
@@ -66,7 +67,7 @@ namespace LoriaNET
             else
             {
                 // If not, callback a command not found message
-                Configuration.Callbacks.Propagate(Resources.Strings.CommandNotFound);
+                Loria.Callbacks.Propagate(Resources.Strings.CommandNotFound);
             }
         }
 
@@ -74,12 +75,12 @@ namespace LoriaNET
         /// Propagate a callback to all enabled callbacks.
         /// </summary>
         /// <param name="message">A message to callback.</param>
-        internal void PropagateCallback(string message)
+        public void PropagateCallback(string message)
         {
             if (string.IsNullOrEmpty(message)) return;
 
             // Propagate to all enabled callbacks
-            Configuration.Callbacks.Propagate(message);
+            Loria.Callbacks.Propagate(message);
         }
     }
 }

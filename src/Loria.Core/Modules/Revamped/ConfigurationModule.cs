@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace LoriaNET
 {
-    internal sealed class ConfigurationModule : Module, IAction
+    public sealed class ConfigurationModule : Module, IAction
     {
         const string SetIntent = "set";
         const string GetIntent = "get";
@@ -25,8 +25,8 @@ namespace LoriaNET
             "conf get spotify::APIKey"
         };
         
-        public ConfigurationModule(Configuration configuration)
-            : base (configuration)
+        public ConfigurationModule(Loria loria)
+            : base (loria)
         {
         }
 
@@ -47,7 +47,7 @@ namespace LoriaNET
                     if (ConfigurationManager.AppSettings.AllKeys.Contains(key))
                     {
                         var value = ConfigurationManager.AppSettings.Get(key);
-                        Configuration.Hub.PropagateCallback(value);
+                        Loria.Hub.PropagateCallback(value);
                     }
                     break;
 

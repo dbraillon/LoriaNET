@@ -11,7 +11,7 @@ namespace LoriaNET
     /// <summary>
     /// The IFTTT module provides intents and entities to interact with IFTTT webhook module.
     /// </summary>
-    internal sealed class IftttModule : Module, IListener, ICallback
+    public sealed class IftttModule : Module, IListener, ICallback
     {
         public override string Name => "IFTTT module";
 
@@ -20,14 +20,14 @@ namespace LoriaNET
         public WebServer WebServer { get; set; }
         public bool Paused { get; set; }
 
-        public IftttModule(Configuration configuration) 
-            : base(configuration)
+        public IftttModule(Loria loria) 
+            : base(loria)
         {
         }
 
         public override void Configure()
         {
-            MakerKey = Configuration.Get("ifttt::MakerKey");
+            MakerKey = Loria.Data.ConfigurationFile.Get("ifttt::MakerKey");
             WebServer = new WebServer(HandleRequest, "http://*:80/");
             Activate();
         }
@@ -96,7 +96,7 @@ namespace LoriaNET
 
             if (string.Equals(direction.ToString(), Callbacks.Keyword, System.StringComparison.InvariantCultureIgnoreCase))
             {
-                Configuration.Hub.PropagateCallback(json.ContainsKey(string.Empty) ? json[string.Empty].ToString() : string.Empty);
+                Loria.Hub.PropagateCallback(json.ContainsKey(string.Empty) ? json[string.Empty].ToString() : string.Empty);
             }
             else
             {
@@ -107,7 +107,7 @@ namespace LoriaNET
                         other.Select(o => $"-{o.Key} {o.Value}")
                     )
                 );
-                Configuration.Hub.PropagateCommand(new Command(command.Trim()));
+                Loria.Hub.PropagateCommand(new Command(command.Trim()));
             }
             
             return "OK";

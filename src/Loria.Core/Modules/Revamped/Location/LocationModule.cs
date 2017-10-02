@@ -1,5 +1,8 @@
 ﻿using Loria.Google;
+using LoriaNET.Core.Database;
 using LoriaNET.Resources;
+using LoriaNET.Storage;
+using LoriaNET.Storage.Database;
 using System;
 using System.Collections.Specialized;
 using System.Linq;
@@ -56,13 +59,13 @@ namespace LoriaNET.Location
         public GoogleMap GoogleMap { get; set; }
         public Timer GoogleMapTimer { get; set; }
 
-        public LocationModule(Configuration configuration) 
-            : base(configuration)
+        public LocationModule(Loria loria) 
+            : base(loria)
         {
             Positions = new Positions();
             Places = new Places();
             
-            GoogleMap = new GoogleMap(Configuration.Get("google::ApiKey"));
+            GoogleMap = new GoogleMap(Loria.Data.ConfigurationFile.Get("google::ApiKey"));
         }
         
         public override void Configure()
@@ -71,11 +74,11 @@ namespace LoriaNET.Location
             // with a discussion between the user and Loria
 
             // Add manager's home
-            Positions.Add(Configuration.Manager);
-            Positions.AddRange(Configuration.Contacts);
+            Positions.Add(Loria.Data.Manager);
+            Positions.AddRange(Loria.Data.Contacts);
 
             // Handle Loria contacts change
-            Configuration.Contacts.CollectionChanged += Contacts_CollectionChanged;
+            Loria.Data.Contacts.CollectionChanged += Contacts_CollectionChanged;
 
             // Start if available google map reverse geocoding thread
             if (GoogleMap.IsConfigured)
@@ -107,7 +110,7 @@ namespace LoriaNET.Location
             switch (e.Action)
             {
                 case NotifyCollectionChangedAction.Add:
-                    var newPerson = e.NewItems.OfType<Person>().FirstOrDefault();
+                    var newPerson = e.NewItems.OfType<PersonEntity>().FirstOrDefault();
                     if (newPerson != null)
                     {
                         Positions.Add(newPerson);
@@ -115,7 +118,7 @@ namespace LoriaNET.Location
                     break;
 
                 case NotifyCollectionChangedAction.Remove:
-                    var oldPerson = e.OldItems.OfType<Person>().FirstOrDefault();
+                    var oldPerson = e.OldItems.OfType<PersonEntity>().FirstOrDefault();
                     if (oldPerson != null)
                     {
                         Positions.Remove(oldPerson);
@@ -159,21 +162,21 @@ namespace LoriaNET.Location
             var forEntity = command.GetEntity(ForEntity);
             if (forEntity == null)
             {
-                Configuration.Hub.PropagateCallback(Strings.LocationModulePersonNotFound);
+                Loria.Hub.PropagateCallback(Strings.LocationModulePersonNotFound);
                 return;
             }
 
             var coordinatesEntity = command.GetEntity(CoordinatesEntity);
             if (coordinatesEntity == null)
             {
-                Configuration.Hub.PropagateCallback(Strings.LocationModuleCoordinatesNotFound);
+                Loria.Hub.PropagateCallback(Strings.LocationModuleCoordinatesNotFound);
                 return;
             }
 
-            var person = Configuration.GetPerson(forEntity.Value);
+            var person = Loria.Data.GetPerson(forEntity.Value);
             if (person == null)
             {
-                Configuration.Hub.PropagateCallback(Strings.LocationModulePersonUnknown);
+                Loria.Hub.PropagateCallback(Strings.LocationModulePersonUnknown);
                 return;
             }
 
@@ -185,19 +188,19 @@ namespace LoriaNET.Location
             var forEntity = command.GetEntity(ForEntity);
             if (forEntity == null)
             {
-                Configuration.Hub.PropagateCallback(Strings.LocationModulePersonNotFound);
+                Loria.Hub.PropagateCallback(Strings.LocationModulePersonNotFound);
                 return;
             }
 
-            var person = Configuration.GetPerson(forEntity.Value);
+            var person = Loria.Data.GetPerson(forEntity.Value);
             if (person == null)
             {
-                Configuration.Hub.PropagateCallback(Strings.LocationModulePersonUnknown);
+                Loria.Hub.PropagateCallback(Strings.LocationModulePersonUnknown);
                 return;
             }
 
             var position = Positions.Get(person);
-            Configuration.Hub.PropagateCallback(position.ToString());
+            Loria.Hub.PropagateCallback(position.ToString());
         }
 
         public void Leave(Command command)
@@ -205,28 +208,28 @@ namespace LoriaNET.Location
             var forEntity = command.GetEntity(ForEntity);
             if (forEntity == null)
             {
-                Configuration.Hub.PropagateCallback(Strings.LocationModulePersonNotFound);
+                Loria.Hub.PropagateCallback(Strings.LocationModulePersonNotFound);
                 return;
             }
 
             var placeEntity = command.GetEntity(PlaceEntity);
             if (placeEntity == null)
             {
-                Configuration.Hub.PropagateCallback(Strings.LocationModulePlaceNotFound);
+                Loria.Hub.PropagateCallback(Strings.LocationModulePlaceNotFound);
                 return;
             }
 
-            var person = Configuration.GetPerson(forEntity.Value);
+            var person = Loria.Data.GetPerson(forEntity.Value);
             if (person == null)
             {
-                Configuration.Hub.PropagateCallback(Strings.LocationModulePersonUnknown);
+                Loria.Hub.PropagateCallback(Strings.LocationModulePersonUnknown);
                 return;
             }
 
             var place = Places.Get(placeEntity.Value);
             if (place == null)
             {
-                Configuration.Hub.PropagateCallback(Strings.LocationModulePlaceUnknown);
+                Loria.Hub.PropagateCallback(Strings.LocationModulePlaceUnknown);
                 return;
             }
 
@@ -238,28 +241,28 @@ namespace LoriaNET.Location
             var forEntity = command.GetEntity(ForEntity);
             if (forEntity == null)
             {
-                Configuration.Hub.PropagateCallback(Strings.LocationModulePersonNotFound);
+                Loria.Hub.PropagateCallback(Strings.LocationModulePersonNotFound);
                 return;
             }
 
             var placeEntity = command.GetEntity(PlaceEntity);
             if (placeEntity == null)
             {
-                Configuration.Hub.PropagateCallback(Strings.LocationModulePlaceNotFound);
+                Loria.Hub.PropagateCallback(Strings.LocationModulePlaceNotFound);
                 return;
             }
 
-            var person = Configuration.GetPerson(forEntity.Value);
+            var person = Loria.Data.GetPerson(forEntity.Value);
             if (person == null)
             {
-                Configuration.Hub.PropagateCallback(Strings.LocationModulePersonUnknown);
+                Loria.Hub.PropagateCallback(Strings.LocationModulePersonUnknown);
                 return;
             }
 
             var place = Places.Get(placeEntity.Value);
             if (place == null)
             {
-                Configuration.Hub.PropagateCallback(Strings.LocationModulePlaceUnknown);
+                Loria.Hub.PropagateCallback(Strings.LocationModulePlaceUnknown);
                 return;
             }
 
@@ -271,14 +274,14 @@ namespace LoriaNET.Location
             var coordinatesEntity = command.GetEntity(CoordinatesEntity);
             if (coordinatesEntity == null)
             {
-                Configuration.Hub.PropagateCallback(Strings.LocationModuleCoordinatesNotFound);
+                Loria.Hub.PropagateCallback(Strings.LocationModuleCoordinatesNotFound);
                 return;
             }
 
             var placeEntity = command.GetEntity(PlaceEntity);
             if (placeEntity == null)
             {
-                Configuration.Hub.PropagateCallback(Strings.LocationModulePlaceNotFound);
+                Loria.Hub.PropagateCallback(Strings.LocationModulePlaceNotFound);
                 return;
             }
 
@@ -291,7 +294,7 @@ namespace LoriaNET.Location
             var placeEntity = command.GetEntity(PlaceEntity);
             if (placeEntity == null)
             {
-                Configuration.Hub.PropagateCallback(Strings.LocationModulePlaceNotFound);
+                Loria.Hub.PropagateCallback(Strings.LocationModulePlaceNotFound);
                 return;
             }
 

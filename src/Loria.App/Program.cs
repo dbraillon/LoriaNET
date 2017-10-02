@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using LoriaNET.Core.Database;
+using System.Globalization;
 
 namespace LoriaNET
 {
@@ -6,11 +7,7 @@ namespace LoriaNET
     {
         static void Main(string[] args)
         {
-            var loria = new Loria(
-                configuration: new Configuration(
-                    culture: CultureInfo.GetCultureInfo("fr-fr")
-                )
-            );
+            var loria = new Loria();
             loria.Live();
         }
     }

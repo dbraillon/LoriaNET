@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace LoriaNET
 {
-    internal sealed class SpotifyModule : Module, IAction
+    public sealed class SpotifyModule : Module, IAction
     {
         public const string PlayIntent = "play";
         public const string SetIntent = "set";
@@ -49,10 +49,10 @@ namespace LoriaNET
 
         public SpotifyPlayer SpotifyPlayer { get; }
 
-        public SpotifyModule(Configuration configuration) 
-            : base(configuration)
+        public SpotifyModule(Loria loria) 
+            : base(loria)
         {
-            SpotifyPlayer = new SpotifyPlayer(configuration.Get("spotify::APIKey"), "http://localhost", 8080);
+            SpotifyPlayer = new SpotifyPlayer(loria.Data.ConfigurationFile.Get("spotify::APIKey"), "http://localhost", 8080);
         }
 
         public override void Configure()

@@ -3,7 +3,7 @@
     /// <summary>
     /// An interface to make actions for Loria.
     /// </summary>
-    internal interface IAction
+    public interface IAction
     {
         string Name { get; }
         string Description { get; }

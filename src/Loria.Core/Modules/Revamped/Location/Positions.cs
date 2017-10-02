@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using LoriaNET.Core.Database;
+using LoriaNET.Storage.Database;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace LoriaNET.Location
@@ -15,12 +17,12 @@ namespace LoriaNET.Location
             Items = new List<Position>();
         }
 
-        public bool IsKnown(Person person)
+        public bool IsKnown(PersonEntity person)
         {
             return Items.Any(i => i.Person == person);
         }
 
-        public Position Add(Person person)
+        public Position Add(PersonEntity person)
         {
             if (IsKnown(person)) return Get(person);
 
@@ -29,14 +31,14 @@ namespace LoriaNET.Location
 
             return position;
         }
-        public void AddRange(IEnumerable<Person> persons)
+        public void AddRange(IEnumerable<PersonEntity> persons)
         {
             foreach (var person in persons)
             {
                 Add(person);
             }
         }
-        public void Remove(Person person)
+        public void Remove(PersonEntity person)
         {
             var position = Get(person);
             if (position != null)
@@ -44,26 +46,26 @@ namespace LoriaNET.Location
                 Items.Remove(position);
             }
         }
-        public Position Get(Person person)
+        public Position Get(PersonEntity person)
         {
             if (!IsKnown(person)) return Add(person);
 
             return Items.First(p => p.Person == person);
         }
 
-        public void SetPlace(Person person, Place place)
+        public void SetPlace(PersonEntity person, Place place)
         {
             Get(person)?.SetPlace(place);
         }
-        public void SetCoordinate(Person person, Coordinates coordinates)
+        public void SetCoordinate(PersonEntity person, Coordinates coordinates)
         {
             Get(person)?.SetCoordinates(coordinates);
         }
-        public void LeavePlace(Person person, Place place)
+        public void LeavePlace(PersonEntity person, Place place)
         {
             Get(person)?.LeavePlace(place);
         }
-        public void EnterPlace(Person person, Place place)
+        public void EnterPlace(PersonEntity person, Place place)
         {
             Get(person)?.EnterPlace(place);
         }

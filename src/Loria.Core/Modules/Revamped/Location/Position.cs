@@ -1,4 +1,6 @@
-﻿using LoriaNET.Resources;
+﻿using LoriaNET.Core.Database;
+using LoriaNET.Resources;
+using LoriaNET.Storage.Database;
 using System;
 
 namespace LoriaNET.Location
@@ -8,12 +10,12 @@ namespace LoriaNET.Location
     /// </summary>
     public class Position
     {
-        public Person Person { get; set; }
+        public PersonEntity Person { get; set; }
         public Place Place { get; set; }
         public Coordinates Coordinates { get; set; }
         public PositionState State { get; set; }
 
-        public Position(Person person)
+        public Position(PersonEntity person)
         {
             Person = person;
         }

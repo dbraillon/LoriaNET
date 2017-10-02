@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using LoriaNET.Storage;
+using System.Threading;
 
 namespace LoriaNET
 {
@@ -15,22 +16,52 @@ namespace LoriaNET
         /// <summary>
         /// Loria's configuration.
         /// </summary>
-        public Configuration Configuration { get; }
+        public Data Data { get; }
+
+        /// <summary>
+        /// Every modules loaded by Loria.
+        /// </summary>
+        public Modules Modules { get; set; }
+
+        /// <summary>
+        /// Every actions loaded by Loria.
+        /// </summary>
+        public Actions Actions { get; }
+
+        /// <summary>
+        /// Every callbacks loaded by Loria.
+        /// </summary>
+        public Callbacks Callbacks { get; }
+
+        /// <summary>
+        /// Every listeners loaded by Loria.
+        /// </summary>
+        public Listeners Listeners { get; }
+
+        /// <summary>
+        /// Loria's hub, used to propagate commands or callbacks.
+        /// </summary>
+        public Hub Hub { get; }
 
         /// <summary>
         /// Create a new instance of Loria with a basic configuration.
         /// </summary>
-        public Loria() : this(new Configuration())
+        public Loria()
         {
-        }
+            // Retrieve data
+            Data = new Data();
 
-        /// <summary>
-        /// Create a new instance of Loria.
-        /// </summary>
-        /// <param name="configuration">A custom configuration.</param>
-        public Loria(Configuration configuration)
-        {
-            Configuration = configuration;
+            // Configure all modules
+            Modules = new Modules(this);
+            Modules.ConfigureAll();
+
+            // Initialize actions, callbacks and listeners
+            Actions = new Actions(Modules.GetAll<IAction>());
+            Callbacks = new Callbacks(Modules.GetAll<ICallback>());
+            Listeners = new Listeners(Modules.GetAll<IListener>());
+
+            // Prepare the hub
+            Hub = new Hub(this);
         }
 
         /// <summary>
@@ -54,7 +85,7 @@ namespace LoriaNET
             IsLiving = true;
 
             // Start enabled listeners
-            Configuration.Listeners.StartAll();
+            Listeners.StartAll();
         }
 
         /// <summary>
@@ -63,7 +94,7 @@ namespace LoriaNET
         public void Stop()
         {
             // Stop listeners
-            Configuration.Listeners.StopAll();
+            Listeners.StopAll();
 
             // Everything have been stopped
             IsLiving = false;

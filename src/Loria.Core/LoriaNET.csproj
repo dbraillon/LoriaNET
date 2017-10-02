@@ -11,6 +11,8 @@
     <AssemblyName>LoriaNET</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -20,7 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <PlatformTarget>x64</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -31,6 +33,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -41,8 +49,21 @@
       <HintPath>..\packages\SpotifyAPI-NET.2.16.0\lib\SpotifyAPI.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.SQLite, Version=1.0.105.2, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SQLite.Core.1.0.105.2\lib\net46\System.Data.SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SQLite.EF6, Version=1.0.105.2, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SQLite.EF6.1.0.105.2\lib\net46\System.Data.SQLite.EF6.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SQLite.EF6.Migrations, Version=1.0.104.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SQLite.EF6.Migrations.1.0.104\lib\System.Data.SQLite.EF6.Migrations.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SQLite.Linq, Version=1.0.105.2, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SQLite.Linq.1.0.105.2\lib\net46\System.Data.SQLite.Linq.dll</HintPath>
+    </Reference>
     <Reference Include="System.Speech" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -53,10 +74,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\Command.cs" />
+    <Compile Include="Core\Storage\Data.cs" />
+    <Compile Include="Core\Storage\File\ConfigurationFile.cs" />
+    <Compile Include="Core\Storage\Database\Entities\Entity.cs" />
+    <Compile Include="Core\Storage\Database\Entities\PersonEntity.cs" />
+    <Compile Include="Core\Storage\Database\LoriaDbContext.cs" />
+    <Compile Include="Core\Storage\Database\Migrations\201709301941455_InitialSetup.cs" />
+    <Compile Include="Core\Storage\Database\Migrations\201709301941455_InitialSetup.Designer.cs">
+      <DependentUpon>201709301941455_InitialSetup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Core\Storage\Database\Migrations\Configuration.cs" />
+    <Compile Include="Core\Storage\Database\Repositories\Repository.cs" />
+    <Compile Include="Core\Storage\Database\Repositories\PersonRepository.cs" />
     <Compile Include="Core\Entity.cs" />
     <Compile Include="Core\Hub.cs" />
     <Compile Include="Core\Modules\Module.cs" />
-    <Compile Include="Core\Person.cs" />
     <Compile Include="Modules\Revamped\ConfigurationModule.cs" />
     <Compile Include="Modules\Revamped\Location\Coordinates.cs" />
     <Compile Include="Modules\Revamped\Location\Place.cs" />
@@ -78,7 +110,6 @@
     <Compile Include="Core\Modules\Modules.cs" />
     <Compile Include="Core\Callbacks\Callbacks.cs" />
     <Compile Include="Core\Callbacks\ICallback.cs" />
-    <Compile Include="Core\Configuration.cs" />
     <Compile Include="Core\Actions\Actions.cs" />
     <Compile Include="Core\Modules\IModule.cs" />
     <Compile Include="Core\Listeners\Listener.cs" />
@@ -87,6 +118,7 @@
     <Compile Include="Core\Loria.cs" />
     <Compile Include="Modules\Revamped\ConsoleModule.cs" />
     <Compile Include="Modules\Revamped\HelpModule.cs" />
+    <Compile Include="Modules\Revamped\Voice\VoiceModule.cs" />
     <Compile Include="Modules\VoiceModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Strings.fr.Designer.cs">
@@ -109,6 +141,10 @@
       <Project>{b5fa7cd5-bcf2-42e2-aa77-b719e7c3849f}</Project>
       <Name>Loria.Spotify</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Libraries\Loria.Voice\Loria.Voice.csproj">
+      <Project>{6c133a56-df8b-4c8c-9dd1-0f438e2fc4f7}</Project>
+      <Name>Loria.Voice</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Microsoft.CognitiveServices\Microsoft.CognitiveServices\Microsoft.CognitiveServices.csproj">
       <Project>{26f6df79-fa0c-419f-8ae9-b7e82f5dd0d8}</Project>
       <Name>Microsoft.CognitiveServices</Name>
@@ -119,6 +155,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Core\Storage\Database\Migrations\201709301941455_InitialSetup.resx">
+      <DependentUpon>201709301941455_InitialSetup.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Strings.fr.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Strings.fr.Designer.cs</LastGenOutput>
@@ -129,4 +168,11 @@
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\System.Data.SQLite.Core.1.0.105.2\build\net46\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.105.2\build\net46\System.Data.SQLite.Core.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\System.Data.SQLite.Core.1.0.105.2\build\net46\System.Data.SQLite.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\System.Data.SQLite.Core.1.0.105.2\build\net46\System.Data.SQLite.Core.targets'))" />
+  </Target>
 </Project>
