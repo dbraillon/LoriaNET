@@ -5,7 +5,10 @@ namespace LoriaNET
     /// <summary>
     /// A module to log every callbacks in a file.
     /// </summary>
-    public sealed class LogModule : Module, ICallback
+    /// <remarks>
+    /// Updated for version 1.1.0.
+    /// </remarks>
+    public class LogModule : Module, ICallback
     {
         public override string Name => "Log module";
         
@@ -16,7 +19,9 @@ namespace LoriaNET
 
         public override void Configure()
         {
+            // Create the log file
             GRoggle.Use(new FileRoggle(@"logs\callbacks.log", acceptedLogLevels: RoggleLogLevel.Debug | RoggleLogLevel.Error));
+
             Activate();
         }
 

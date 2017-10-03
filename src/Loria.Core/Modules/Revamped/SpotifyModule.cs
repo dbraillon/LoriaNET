@@ -3,7 +3,13 @@ using System.Linq;
 
 namespace LoriaNET
 {
-    public sealed class SpotifyModule : Module, IAction
+    /// <summary>
+    /// A module to work with local Spotify player.
+    /// </summary>
+    /// <remarks>
+    /// Updated for version 1.1.0.
+    /// </remarks>
+    public class SpotifyModule : Module, IAction
     {
         public const string PlayIntent = "play";
         public const string SetIntent = "set";
@@ -19,21 +25,17 @@ namespace LoriaNET
         public const string VolumeEntity = "volume";
 
         public override string Name => "Spotify module";
-
-        public string Description => "Controls spotify with Loria!";
+        public string Description => "Controls your local Spotify player";
 
         public string Command => "spotify";
-
         public string[] SupportedIntents => new string[]
         {
             PlayIntent, SetIntent, ResumeIntent, PauseIntent, NextIntent, PreviousIntent
         };
-
         public string[] SupportedEntities => new string[]
         {
             AlbumEntity, ArtistEntity, PlaylistEntity, TrackEntity, VolumeEntity
         };
-
         public string[] Samples => new string[]
         {
             "spotify play -track Heathens",
@@ -57,7 +59,9 @@ namespace LoriaNET
 
         public override void Configure()
         {
+            // Initialize Spotify player controller
             SpotifyPlayer.InitializeAsync().GetAwaiter().GetResult();
+
             Activate();
         }
 

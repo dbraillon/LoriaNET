@@ -5,7 +5,10 @@ namespace LoriaNET
     /// <summary>
     /// The console module provides a listener and a callback to interact with a console.
     /// </summary>
-    public sealed class ConsoleModule : Listener, ICallback, IModule
+    /// <remarks>
+    /// Updated for version 1.1.0.
+    /// </remarks>
+    public class ConsoleModule : Listener, ICallback, IModule
     {
         public override string Name => "Console module";
         
@@ -16,6 +19,7 @@ namespace LoriaNET
         
         public override void Configure()
         {
+            // No configuration needed, always activated
             Activate();
         }
 

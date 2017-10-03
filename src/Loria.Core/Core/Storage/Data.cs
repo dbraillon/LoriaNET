@@ -57,9 +57,7 @@ namespace LoriaNET.Storage
             if (Manager.Is(firstName)) return Manager;
             return Contacts.FirstOrDefault(c => c.Is(firstName));
         }
-
-
-
+        
         public Data()
         {
             ConfigurationFile = new ConfigurationFile();

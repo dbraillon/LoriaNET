@@ -5,7 +5,10 @@ namespace LoriaNET
     /// <summary>
     /// The date time module provides intents and entities for giving the date and time.
     /// </summary>
-    public sealed class DateTimeModule : Module, IAction
+    /// <remarks>
+    /// Updated for version 1.1.0.
+    /// </remarks>
+    public class DateTimeModule : Module, IAction
     {
         const string DateIntent = "date";
         const string TimeIntent = "time";
@@ -34,13 +37,10 @@ namespace LoriaNET
 
         public override void Configure()
         {
+            // No configuration needed, always activated
             Activate();
         }
         
-        /// <summary>
-        /// Perform the action and intents.
-        /// </summary>
-        /// <param name="args">Should contains one intent and zero, one or multiple entities.</param>
         public void Perform(Command command)
         {
             switch (command.Intent.ToLowerInvariant())

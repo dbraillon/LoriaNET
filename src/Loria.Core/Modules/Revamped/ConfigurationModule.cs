@@ -1,15 +1,20 @@
-﻿using System.Configuration;
-using System.Linq;
+﻿using System.Linq;
 
 namespace LoriaNET
 {
-    public sealed class ConfigurationModule : Module, IAction
+    /// <summary>
+    /// The console module provides a listener and a callback to interact with a console.
+    /// </summary>
+    /// <remarks>
+    /// Updated for version 1.1.0.
+    /// </remarks>
+    public class ConfigurationModule : Module, IAction
     {
         const string SetIntent = "set";
         const string GetIntent = "get";
 
         public override string Name => "Configuration module";
-        public string Description => "Get or set a property value of configuration object";
+        public string Description => "Get or set a property value from configuration file";
 
         public string Command => "conf";
         public string[] SupportedIntents => new string[]
@@ -32,6 +37,7 @@ namespace LoriaNET
 
         public override void Configure()
         {
+            // No configuration needed, always activated
             Activate();
         }
 
@@ -43,21 +49,13 @@ namespace LoriaNET
             switch (command.Intent.ToLowerInvariant())
             {
                 case GetIntent:
-
-                    if (ConfigurationManager.AppSettings.AllKeys.Contains(key))
-                    {
-                        var value = ConfigurationManager.AppSettings.Get(key);
-                        Loria.Hub.PropagateCallback(value);
-                    }
+                    var value = Loria.Data.ConfigurationFile.Get(key);
+                    Loria.Hub.PropagateCallback(value);
                     break;
 
                 case SetIntent:
-                    
-                    if (ConfigurationManager.AppSettings.AllKeys.Contains(key))
-                    {
-                        var newValue = string.Join(" ", splitted.Skip(3));
-                        ConfigurationManager.AppSettings.Set(key, newValue);
-                    }
+                    var newValue = string.Join(" ", splitted.Skip(3));
+                    Loria.Data.ConfigurationFile.Set(key, newValue);
                     break;
 
                 default:
