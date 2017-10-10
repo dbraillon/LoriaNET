@@ -19,6 +19,8 @@ namespace LoriaNET.Storage
             get => _Culture;
             set
             {
+                _Culture = value;
+
                 // Persist culture to configuration file
                 ConfigurationFile.Set(ConfigurationFile.CultureKey, value.Name);
 

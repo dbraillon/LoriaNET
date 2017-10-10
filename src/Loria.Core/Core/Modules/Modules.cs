@@ -47,11 +47,13 @@ namespace LoriaNET
             {
                 try
                 {
+                    Console.Write($"Loading {module.Name.ToLower()}... ");
                     module.Configure();
+                    Console.WriteLine("OK");
                 }
                 catch
                 {
-                    // TODO
+                    Console.WriteLine("ERROR");
                 }
             }
         }
