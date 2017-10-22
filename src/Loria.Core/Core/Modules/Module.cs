@@ -1,21 +1,11 @@
-﻿using LoriaNET.Storage;
-
-namespace LoriaNET
+﻿namespace LoriaNET
 {
-    /// <summary>
-    /// A class providing a simple way to implement the module interface.
-    /// </summary>
     public abstract class Module : IModule
     {
-        public Loria Loria { get; set; }
         public bool Enabled { get; set; }
 
         public abstract string Name { get; }
-
-        public Module(Loria loria)
-        {
-            Loria = loria;
-        }
+        public abstract string Description { get; }
 
         public void Activate() => Enabled = true;
         public void Deactivate() => Enabled = false;

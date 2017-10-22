@@ -73,7 +73,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Core\Command.cs" />
+    <Compile Include="Core\Actions\Actions.cs" />
+    <Compile Include="Core\Callbacks\Callbacks.cs" />
+    <Compile Include="Core\Commands\ActionCommand.cs" />
+    <Compile Include="Core\Commands\CallbackCommand.cs" />
+    <Compile Include="Core\Commands\Command.cs" />
+    <Compile Include="Core\Helpers\HandleCommandSet.cs" />
+    <Compile Include="Core\Helpers\IHasName.cs" />
+    <Compile Include="Core\Commands\IHandleCommand.cs" />
+    <Compile Include="Core\Helpers\Set.cs" />
+    <Compile Include="Core\Listeners\ListenerEventArgs.cs" />
+    <Compile Include="Core\Logs\ConsoleLog.cs" />
+    <Compile Include="Core\Logs\ILog.cs" />
     <Compile Include="Core\Storage\Data.cs" />
     <Compile Include="Core\Storage\File\ConfigurationFile.cs" />
     <Compile Include="Core\Storage\Database\Entities\Entity.cs" />
@@ -86,8 +97,7 @@
     <Compile Include="Core\Storage\Database\Migrations\Configuration.cs" />
     <Compile Include="Core\Storage\Database\Repositories\Repository.cs" />
     <Compile Include="Core\Storage\Database\Repositories\PersonRepository.cs" />
-    <Compile Include="Core\Entity.cs" />
-    <Compile Include="Core\Hub.cs" />
+    <Compile Include="Core\Commands\Entity.cs" />
     <Compile Include="Core\Modules\Module.cs" />
     <Compile Include="Modules\Revamped\ConfigurationModule.cs" />
     <Compile Include="Modules\Revamped\Location\Coordinates.cs" />
@@ -108,9 +118,7 @@
     <Compile Include="Core\Actions\IAction.cs" />
     <Compile Include="Modules\Revamped\Ifttt\WebServer.cs" />
     <Compile Include="Core\Modules\Modules.cs" />
-    <Compile Include="Core\Callbacks\Callbacks.cs" />
     <Compile Include="Core\Callbacks\ICallback.cs" />
-    <Compile Include="Core\Actions\Actions.cs" />
     <Compile Include="Core\Modules\IModule.cs" />
     <Compile Include="Core\Listeners\Listener.cs" />
     <Compile Include="Core\Listeners\IListener.cs" />
@@ -144,10 +152,6 @@
     <ProjectReference Include="..\Libraries\Loria.Voice\Loria.Voice.csproj">
       <Project>{6c133a56-df8b-4c8c-9dd1-0f438e2fc4f7}</Project>
       <Name>Loria.Voice</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Microsoft.CognitiveServices\Microsoft.CognitiveServices\Microsoft.CognitiveServices.csproj">
-      <Project>{26f6df79-fa0c-419f-8ae9-b7e82f5dd0d8}</Project>
-      <Name>Microsoft.CognitiveServices</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -1,9 +1,6 @@
 ﻿namespace LoriaNET
 {
-    /// <summary>
-    /// An interface to make modules for Loria.
-    /// </summary>
-    public interface IModule
+    public interface IModule : IHasName
     {
         string Name { get; }
 

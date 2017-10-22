@@ -1,50 +1,16 @@
-﻿using System;
-using System.Linq;
+﻿using System.Collections.Generic;
 
 namespace LoriaNET
 {
-    /// <summary>
-    /// A class that contains a set of callbacks, allowing user to retrieve a specific 
-    /// callback or to propagate a message to every callbacks in set.
-    /// </summary>
-    public sealed class Callbacks
+    public class Callbacks : HandleCommandSet<ICallback>
     {
-        /// <summary>
-        /// Keyword used to make the difference when calling a callback or an action.
-        /// </summary>
         public const string Keyword = "callback";
 
-        /// <summary>
-        /// A set of callbacks.
-        /// </summary>
-        private ICallback[] Set { get; }
-
-        /// <summary>
-        /// Create an instance with a pre defined set of callbacks.
-        /// </summary>
-        /// <param name="callbacks">A set of callbacks.</param>
-        public Callbacks(params ICallback[] callbacks)
+        public Callbacks(params ICallback[] objects) : base(objects)
         {
-            Set = callbacks;
         }
-
-        /// <summary>
-        /// Retrieve a callback by its name.
-        /// </summary>
-        /// <param name="name">A name of a callback.</param>
-        /// <returns>Found callback or null.</returns>
-        public ICallback Get(string name) => Set.FirstOrDefault(l => string.Equals(l.Name, name, StringComparison.InvariantCultureIgnoreCase));
-
-        /// <summary>
-        /// Propagate a message to every callback in the set.
-        /// </summary>
-        /// <param name="message">A message to propagate.</param>
-        public void Propagate(string message)
+        public Callbacks(IEnumerable<ICallback> objects) : base(objects)
         {
-            foreach (var callback in Set)
-            {
-                callback.Callback(message);
-            }
         }
     }
 }

@@ -1,12 +1,6 @@
 ﻿namespace LoriaNET
 {
-    /// <summary>
-    /// An interface to make callbacks for Loria.
-    /// </summary>
-    public interface ICallback
+    public interface ICallback : IHandleCommand
     {
-        string Name { get; }
-
-        void Callback(string message);
     }
 }
