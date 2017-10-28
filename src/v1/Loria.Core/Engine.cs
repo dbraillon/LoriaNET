@@ -11,6 +11,7 @@ namespace Loria.Core
         public Actions Actions { get; }
         public Callbacks Callbacks { get; }
         public Listeners Listeners { get; }
+        public Data Data { get; set; }
         public IPropagator Propagator { get; set; }
 
         public Engine()
@@ -26,6 +27,9 @@ namespace Loria.Core
             Callbacks = new Callbacks(Modules.GetAll<ICallback>());
             Listeners = new Listeners(Modules.GetAll<IListener>());
 
+            // Data
+            Data = new Data(this);
+
             // Propagator
             Propagator = new Propagator(this);
         }
@@ -40,28 +44,20 @@ namespace Loria.Core
         }
         public void LiveAsync()
         {
-            Debug.WriteLine("Starting...");
-
             // Turn the flag on
             IsLiving = true;
 
             // Start enabled listeners
             Listeners.StartAll();
-
-            Debug.WriteLine("Started");
         }
 
         public void Stop()
         {
-            Debug.WriteLine("Stopping...");
-
             // Stop listeners
             Listeners.StopAll();
 
             // Everything have been stopped
             IsLiving = false;
-
-            Debug.WriteLine("Stopped");
         }
     }
 }

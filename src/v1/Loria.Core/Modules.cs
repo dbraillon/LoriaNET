@@ -14,14 +14,19 @@ namespace Loria.Core
             var modules = new List<IModule>();
             var moduleDirPath = Path.Combine(Directory.GetCurrentDirectory(), "modules");
             var moduleDir = Directory.CreateDirectory(moduleDirPath);
-            var moduleFiles = moduleDir.GetFiles("*.dll").ToList();
+            var dlls = moduleDir.GetFiles("*.dll", SearchOption.AllDirectories)
+                .Select(dll => Assembly.LoadFile(dll.FullName));
 
-            Debug.WriteLine($"Found {moduleFiles.Count} file(s) in '{moduleDirPath}' directory");
-
-            foreach (var moduleFile in moduleFiles)
+            AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler((sender, args) =>
             {
-                var assembly = Assembly.LoadFile(moduleFile.FullName);
-                var assemblyModules = assembly.GetTypes()
+                var assemblyName = new AssemblyName(args.Name);
+                var assembly = dlls.FirstOrDefault(x => x.GetName().Name == assemblyName.Name);
+                return assembly;
+            });
+
+            foreach (var dll in dlls)
+            {
+                var assemblyModules = dll.GetTypes()
                     .Where(t =>
                         typeof(IModule).IsAssignableFrom(t) &&
                         t.IsClass && !t.IsAbstract
@@ -29,7 +34,7 @@ namespace Loria.Core
                     .Select(t => Activator.CreateInstance(t, engine) as IModule)
                     .ToList();
 
-                Debug.WriteLine($"Loaded '{moduleFile.FullName}'. Found {assemblyModules.Count} module(s).");
+                Debug.WriteLine($"Loaded '{dll.FullName}'. Found {assemblyModules.Count} module(s).");
 
                 foreach (var module in assemblyModules)
                 {
